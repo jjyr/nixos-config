@@ -93,6 +93,7 @@
     docker-client
     git
     rustup
+    nodejs-16_x
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
