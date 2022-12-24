@@ -79,10 +79,11 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Default ENV
-  environment.sessionVariables = {
-    ALL_PROXY = "socks5://192.168.64.1:7890";
-  };
+ # Default ENV
+ environment.sessionVariables = {
+   ALL_PROXY = "socks5://192.168.64.1:7890";
+   PATH = "${config.users.users.jjy.home}/.cargo/bin:${pkgs.path}";
+ };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -94,6 +95,9 @@
     git
     rustup
     nodejs-16_x
+    gnumake
+    gcc
+    rocksdb
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
