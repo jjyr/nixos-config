@@ -21,13 +21,13 @@
     ];
   in {
 
-    # nixosConfigurations.devpc = nixpkgs.lib.nixosSystem {
-    #   system = "x86_64-linux";
-    #   modules = sharedModules ++
-    #     [
-    #     ./machines/devpc/default.nix
-    #     ];
-    # };
+    nixosConfigurations.devpc = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = sharedModules ++
+        [
+        ./machines/devpc/default.nix
+        ];
+    };
 
     homeConfigurations."jjy" = home-manager.lib.homeManagerConfiguration {
       pkgs = import nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };
@@ -43,6 +43,20 @@
       fcitx5.addons = with pkgs; [
         fcitx5-hangul
       ];
+    };
+
+    systemd.user.services."ssh-agent" = {
+      enable = true;
+      description = "SSH key agent";
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK";
+      };
+      environment = {
+        SSH_AUTH_SOCK="%t/ssh-agent.socket";
+        DISPLAY=":0";
+      };
+      wantedBy = "default.target";
     };
   };
 }
