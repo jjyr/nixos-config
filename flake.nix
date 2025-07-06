@@ -18,6 +18,7 @@
     # nixosConfigurations.homepc = nixpkgs.lib.nixosSystem {
     #   system = "x86_64-linux";
     #   modules = [
+    #     environment.systemPackages = [ agenix.packages.${system}.default ];
     #   ];
     # };
 

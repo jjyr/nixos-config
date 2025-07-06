@@ -1,5 +1,5 @@
 # home.nix
-{ pkgs, ... }: {
+{ pkgs, ... }: rec {
   home.stateVersion = "25.05";
   home.username = "jjy";
   home.homeDirectory = "/home/jjy";
@@ -13,12 +13,17 @@
   ];
   home.file.".bashrc".source = ./dotfiles/bashrc;
 
-# # secrets
-#   age.secrets.git-credentials = {
-#     file = ./secrets/git-credentials.age;
-#     path = "${config.home.homeDirectory}/.git-credentials";
-#     mode = "600";
-#   };
+  # secrets
+  age = {
+    identityPaths = [ "${home.homeDirectory}/.ssh/id_ed25519.age" ];
+    secrets = {
+      git-credentials = {
+        file = ./secrets/git-credentials.age;
+        path = "${home.homeDirectory}/.git-credentials";
+        mode = "600";
+      };
+    };
+  };
 
   programs.home-manager.enable = true;
 
