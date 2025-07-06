@@ -3,17 +3,49 @@
   home.stateVersion = "25.05";
   home.username = "jjy";
   home.homeDirectory = "/home/jjy";
-  home.packages = with pkgs; [
-      tailscale
 
-      # input method
-      fcitx5-chinese-addons
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    NIX_PATH = "nixpkgs=flake:nixpkgs$\{NIX_PATH:+:$NIX_PATH}";
+  };
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = [ "firefox.desktop" "chromium-browser.desktop" ];
+      "x-scheme-handler/http " = [ " firefox.desktop" "chromium-browser.desktop" ];
+      "x-scheme-handler/https" = [ "firefox.desktop" "chromium-browser.desktop" ];
+      "x-scheme-handler/about" = [ "firefox.desktop" "chromium-browser.desktop" ];
+      "x-scheme-handler/unknown" = [ "firefox.desktop" "chromium-browser.desktop" ];
+    };
+  };
+
+  home.packages = with pkgs; [
+# input method
+    fcitx5-chinese-addons
       fcitx5-hangul
       fcitx5-configtool
-  ];
-  home.file.".bashrc".source = ./dotfiles/bashrc;
 
-  # secrets
+# tools
+      tailscale
+      vlc
+      obsidian
+      btop
+  ];
+
+# Programs
+  imports = [
+    ../../programs/alacritty.nix
+      ../../programs/bash.nix
+      ../../programs/direnv.nix
+      ../../programs/chromium.nix
+      ../../programs/fonts.nix
+      ../../programs/git.nix
+      ../../programs/neovim
+      ../../programs/vscode.nix
+  ];
+
+# secrets
   age = {
     identityPaths = [ "${home.homeDirectory}/.ssh/id_ed25519.age" ];
     secrets = {
@@ -27,13 +59,4 @@
 
   programs.home-manager.enable = true;
 
-  programs.git = {
-    enable = true;
-    extraConfig = {
-      init = { defaultBranch = "master"; };
-      user = { name = "jjy"; email = "jjyruby@gmail.com"; };
-# timeout after 90 days
-      credential.helper = "cache --timeout=7776000";
-    };
-  };
 }

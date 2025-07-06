@@ -1,6 +1,0 @@
-source ~/.local/share/omarchy/default/bash/rc
-source /usr/share/nvm/init-nvm.sh
-source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
-
-GTK_IM_MODULE=fcitx
-QT_IM_MODULE=fcitx

@@ -13,20 +13,27 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix }@inputs: {
+  outputs = { self, nixpkgs, home-manager, agenix }@inputs: 
 
-    # nixosConfigurations.homepc = nixpkgs.lib.nixosSystem {
+    let
+    sharedModules = [
+    agenix.nixosModules.default
+    ];
+  in {
+
+    # nixosConfigurations.devpc = nixpkgs.lib.nixosSystem {
     #   system = "x86_64-linux";
-    #   modules = [
-    #     environment.systemPackages = [ agenix.packages.${system}.default ];
-    #   ];
+    #   modules = sharedModules ++
+    #     [
+    #     ./machines/devpc/default.nix
+    #     ];
     # };
 
     homeConfigurations."jjy" = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      pkgs = import nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };
       modules = [
         agenix.homeManagerModules.default
-        ./users/jjy/home.nix
+          ./users/jjy/home.nix
       ];
     };
   };
