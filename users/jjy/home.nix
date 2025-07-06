@@ -32,7 +32,9 @@
 
 # Programs
   imports = [
+# ime
   ../../i18n.nix
+# programs
     ../../programs/alacritty.nix
       ../../programs/bash.nix
       ../../programs/direnv.nix
@@ -41,6 +43,10 @@
       ../../programs/git.nix
       ../../programs/neovim
       ../../programs/vscode.nix
+      ../../programs/hyprlock.nix
+
+# services
+      ../../services/hypridle.nix
   ];
 
 # secrets

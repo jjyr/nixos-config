@@ -1,7 +1,8 @@
 {
   pkgs,
-  nvidia,
   inputs,
+  nvidia,
+  preventlock,
   ...
 }:
 {
@@ -25,7 +26,15 @@
           terminal = "alacritty";
           fileManager = "nautilus --new-window";
           browser = "chromium --new-window --ozone-platform=wayland";
+          lockScreenBind = if preventlock then [] else [
+
+            # end sessions
+            "SUPER, ESCAPE, exec, hyprlock"
+            "SUPER SHIFT, ESCAPE, exec, systemctl suspend"
+
+          ];
         in
+        lockScreenBind ++
         [
           "SUPER, return, exec, ${terminal}"
           "SUPER, F, exec, ${fileManager}"
@@ -35,10 +44,6 @@
           "SUPER_CTRL, space, execr, fcitx5-remote -t"
           "SUPER, O, exec, obsidian --no-sandbox %U --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
           "SUPER, W, killactive"
-
-          # end sessions
-          "SUPER, ESCAPE, exec, hyprlock"
-          "SUPER SHIFT, ESCAPE, exec, systemctl suspend"
 
           # tiling
           "SUPER, J, togglesplit, # dwindle"

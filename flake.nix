@@ -20,7 +20,6 @@
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
   outputs =
@@ -37,6 +36,11 @@
       sharedModules = [
         agenix.nixosModules.default
         disko.nixosModules.disko
+      ];
+      homeModules = [
+        agenix.homeManagerModules.default
+          ./modules/hyprland.nix
+          ./users/jjy/home.nix
       ];
     in
     {
@@ -63,12 +67,9 @@
         extraSpecialArgs = {
           inherit inputs;
           nvidia = false;
+          preventlock = false;
         };
-        modules = [
-          agenix.homeManagerModules.default
-          ./modules/hyprland.nix
-          ./users/jjy/home.nix
-        ];
+        modules = homeModules;
       };
 
       homeConfigurations."jjy@homepc" = home-manager.lib.homeManagerConfiguration {
@@ -79,12 +80,9 @@
         extraSpecialArgs = {
           inherit inputs;
           nvidia = true;
+          preventlock = true;
         };
-        modules = [
-          agenix.homeManagerModules.default
-          ./modules/hyprland.nix
-          ./users/jjy/home.nix
-        ];
+        modules = homeModules;
       };
 
       systemd.user.services."ssh-agent" = {
