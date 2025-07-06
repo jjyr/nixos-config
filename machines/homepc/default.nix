@@ -1,4 +1,4 @@
 {
-  imports = [../../disko-config.nix]
+  imports = [../../disko-config.nix];
 }
 

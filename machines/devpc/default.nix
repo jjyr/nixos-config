@@ -1,3 +1,5 @@
-{
-  imports = [../../disko-config.nix]
+{inputs, pkgs, ...}: {
+  imports = [
+    ../../disko-config.nix
+  ];
 }

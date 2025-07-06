@@ -21,20 +21,18 @@
   };
 
   home.packages = with pkgs; [
-# input method
-    fcitx5-chinese-addons
-      fcitx5-hangul
-      fcitx5-configtool
 
 # tools
       tailscale
       vlc
       obsidian
       btop
+      nixfmt-rfc-style
   ];
 
 # Programs
   imports = [
+  ../../i18n.nix
     ../../programs/alacritty.nix
       ../../programs/bash.nix
       ../../programs/direnv.nix
