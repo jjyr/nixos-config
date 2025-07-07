@@ -1,21 +1,4 @@
 {pkgs, ...}: {
-# Enable sddm login manager
-  services.displayManager = {
-    sddm = {
-      enable = true;
-      wayland.enable = true;
-      enableHidpi = true;
-      package = pkgs.kdePackages.sddm;
-      theme = "sddm-astronaut-theme";
-      settings.Theme.CursorTheme = "Bibata-Modern-Classic";
-      extraPackages = with pkgs; [
-        kdePackages.qtmultimedia
-          kdePackages.qtsvg
-          kdePackages.qtvirtualkeyboard
-      ];
-    };
-  };
-
   time.timeZone = "Asia/Shanghai";
 
 
@@ -63,16 +46,5 @@ environment.sessionVariables = {
 
 environment.systemPackages = with pkgs; [
   killall
-  lm_sensors
-  jq
-  bibata-cursors
-  sddm-astronaut # Overlayed
-  pkgs.kdePackages.qtsvg
-  pkgs.kdePackages.qtmultimedia
-  pkgs.kdePackages.qtvirtualkeyboard
-
-# devenv
-# devbox
-# shellify
 ];
 }
