@@ -17,15 +17,15 @@
       font = {
         size = 9;
         normal = {
-          family = "Caskaydi a Mono Nerd Font";
+          family = "CaskaydiaMono Nerd Font";
           style = "Regular";
         };
         bold = {
-          family = "Caskaydi a Mono Nerd Font";
+          family = "CaskaydiaMono Nerd Font";
           style = "Bold";
         };
         italic = {
-          family = "Caskaydi a Mono Nerd Font";
+          family = "CaskaydiaMono Nerd Font";
           style = "Italic";
         };
       };
