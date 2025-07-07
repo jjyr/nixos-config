@@ -1,4 +1,9 @@
-{config, lib, pkgs,...}:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   home.packages = with pkgs; [
     hyprlock
@@ -13,7 +18,7 @@
       };
 
       background = {
-        color = "rgba(26,27,38,1.0)";  # #1a1b26 solid color
+        color = "rgba(26,27,38,1.0)"; # #1a1b26 solid color
       };
 
       animations = {
@@ -26,9 +31,9 @@
         halign = "center";
         valign = "center";
 
-        inner_color = "rgba(26,27,38,0.8)";  # #1a1b26 with opacity
-          outer_color = "rgba(205,214,244,1.0)";  # #cdd6f4
-          outline_thickness = 4;
+        inner_color = "rgba(26,27,38,0.8)"; # #1a1b26 with opacity
+        outer_color = "rgba(205,214,244,1.0)"; # #cdd6f4
+        outline_thickness = 4;
 
         font_family = "CaskaydiaMono Nerd Font";
         font_size = 32;

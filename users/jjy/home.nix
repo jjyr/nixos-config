@@ -1,5 +1,6 @@
 # home.nix
-{ pkgs, ... }: rec {
+{ pkgs, ... }:
+rec {
   home.stateVersion = "25.05";
   home.username = "jjy";
   home.homeDirectory = "/home/jjy";
@@ -12,44 +13,59 @@
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "text/html" = [ "firefox.desktop" "chromium-browser.desktop" ];
-      "x-scheme-handler/http " = [ " firefox.desktop" "chromium-browser.desktop" ];
-      "x-scheme-handler/https" = [ "firefox.desktop" "chromium-browser.desktop" ];
-      "x-scheme-handler/about" = [ "firefox.desktop" "chromium-browser.desktop" ];
-      "x-scheme-handler/unknown" = [ "firefox.desktop" "chromium-browser.desktop" ];
+      "text/html" = [
+        "firefox.desktop"
+        "chromium-browser.desktop"
+      ];
+      "x-scheme-handler/http " = [
+        " firefox.desktop"
+        "chromium-browser.desktop"
+      ];
+      "x-scheme-handler/https" = [
+        "firefox.desktop"
+        "chromium-browser.desktop"
+      ];
+      "x-scheme-handler/about" = [
+        "firefox.desktop"
+        "chromium-browser.desktop"
+      ];
+      "x-scheme-handler/unknown" = [
+        "firefox.desktop"
+        "chromium-browser.desktop"
+      ];
     };
   };
 
   home.packages = with pkgs; [
 
-# tools
-      tailscale
-      vlc
-      obsidian
-      btop
-      nixfmt-rfc-style
+    # tools
+    tailscale
+    vlc
+    obsidian
+    btop
+    nixfmt-rfc-style
   ];
 
-# Programs
+  # Programs
   imports = [
-# ime
-  ../../i18n.nix
-# programs
+    # ime
+    ../../i18n.nix
+    # programs
     ../../programs/alacritty.nix
-      ../../programs/bash.nix
-      ../../programs/direnv.nix
-      ../../programs/chromium.nix
-      ../../programs/fonts.nix
-      ../../programs/git.nix
-      ../../programs/neovim
-      ../../programs/vscode.nix
-      ../../programs/hyprlock.nix
+    ../../programs/bash.nix
+    ../../programs/direnv.nix
+    ../../programs/chromium.nix
+    ../../programs/fonts.nix
+    ../../programs/git.nix
+    ../../programs/neovim
+    ../../programs/vscode.nix
+    ../../programs/hyprlock.nix
 
-# services
-      ../../services/hypridle.nix
+    # services
+    ../../services/hypridle.nix
   ];
 
-# secrets
+  # secrets
   age = {
     identityPaths = [ "${home.homeDirectory}/.ssh/id_ed25519.age" ];
     secrets = {
