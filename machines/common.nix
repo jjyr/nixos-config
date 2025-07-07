@@ -29,6 +29,10 @@ services.xserver.enable = true;
 # Enable touchpad support (enabled default in most desktopManager).
 services.libinput.enable = true;
 
+environment.variables = {
+  XDG_RUNTIME_DIR = "/run/user/$UID";
+};
+
 environment.sessionVariables = {
 # These are the defaults, and xdg.enable does set them, but due to load
 # order, they're not set before environment.variables are set, which could
