@@ -77,7 +77,6 @@
       ];
       homeModules = [
         agenix.homeManagerModules.default
-        ./modules/config-hyprland.nix
         ./users/jjy/home.nix
       ];
 
@@ -107,7 +106,7 @@
           modules = sharedModules ++ [
             ./machines/laptop/default.nix
             {
-              home-manager.extraSpecialArgs = {pkgs=nixospkgs; nvidia = false; preventlock = false;};
+              home-manager.extraSpecialArgs = {pkgs=nixospkgs; nvidia = false; preventlock = false; inherit inputs;};
               home-manager.users.jjy = ./home/users/jjy/home.nix;
               home-manager.backupFileExtension = "backup";
             }

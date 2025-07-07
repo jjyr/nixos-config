@@ -1,5 +1,5 @@
 # home.nix
-{ pkgs, nvidia, preventlock, ... }:
+{ pkgs, inputs, nvidia, preventlock, ... }:
 rec {
   programs.home-manager.enable = true;
 
@@ -74,7 +74,9 @@ rec {
 
     # services
     ../../services/hypridle.nix
+    ../../../modules/config-hyprland.nix
   ];
+
 
   # # secrets
   # age = {
