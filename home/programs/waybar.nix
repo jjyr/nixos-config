@@ -162,9 +162,9 @@
           "tooltip" = true;
           "tooltip-format" = "{}";
         };
-      };
+      }
     ];
-    style = "~/.config/waybar" ''
+    style = ''
       * {
         border: none;
         border-radius: 0;
