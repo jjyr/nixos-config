@@ -77,6 +77,7 @@
       ];
       homeModules = [
         agenix.homeManagerModules.default
+        ./modules/config-hyprland.nix
         ./users/jjy/home.nix
       ];
 

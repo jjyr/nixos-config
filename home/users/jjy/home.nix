@@ -71,7 +71,6 @@ rec {
     ../../programs/vscode.nix
     ../../programs/hyprlock.nix
     ../../programs/waybar.nix
-    ../../programs/hyprland.nix
 
     # services
     ../../services/hypridle.nix
