@@ -29,24 +29,17 @@ services.xserver.enable = true;
 # Enable touchpad support (enabled default in most desktopManager).
 services.libinput.enable = true;
 
-environment.variables = {
-  XDG_RUNTIME_DIR = "/run/user/$UID";
-};
-
 environment.sessionVariables = {
 # These are the defaults, and xdg.enable does set them, but due to load
 # order, they're not set before environment.variables are set, which could
 # cause race conditions.
-  XDG_CACHE_HOME = "$HOME/.cache";
-  XDG_CONFIG_HOME = "$HOME/.config";
-  XDG_DATA_HOME = "$HOME/.local/share";
-  XDG_BIN_HOME = "$HOME/.local/bin";
+  NIXOS_OZONE_WL = 1;
   MOA_ENABLE_WAYLAND = 1;
   XDG_CURRENT_DESKTOP = "Hyprland";
   XDG_SESSION_DESKTOP = "Hyprland";
   XDG_SESSION_TYPE = "wayland";
   GDK_BACKEND = "wayland,x11";
-  QT_QPA_PLATFORM = "wayland,xcb";
+  QT_QPA_PLATFORM = "wayland;xcb";
 
   # templates = "${self}/dev-shells";
 };

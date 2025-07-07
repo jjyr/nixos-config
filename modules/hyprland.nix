@@ -14,6 +14,7 @@ in{
 
   };
 
+# avoid mesa version mismatch
   hardware.graphics = {
     package = pkgs-unstable.mesa;
     # if you also want 32-bit support (e.g for Steam)
@@ -21,7 +22,35 @@ in{
     # package32 = pkgs-unstable.pkgsi686Linux.mesa;
   };
 
-  # Setup keyring
-  services.gnome.gnome-keyring.enable = true;
+# Enable greetd
+  services.greetd = {
+    enable = true;
+    settings = rec {
+      regreet_session = {
+        command = "${lib.exe pkgs.cage} -s -- ${lib.exe pkgs.greetd.regreet}";
+        user = "greeter";
+      };
+      tuigreet_session =
+        let
+        session = "${pkgs.hyprland}/bin/Hyprland";
+      tuigreet = "${lib.exe pkgs.greetd.tuigreet}";
+      in
+      {
+        command = "${tuigreet} --time --remember --cmd ${session}";
+        user = "greeter";
+      };
+      default_session = tuigreet_session;
+    };
+  };
 
+# tty service config
+  systemd.services.greetd.serviceConfig = {
+    Type = "idle";
+    StandardInput = "tty";
+    StandardOutput = "tty";
+    StandardError = "journal";
+    TTYReset = true;
+    TTYVHangup = true;
+    TTYVTDisallocate = true;
+  };
 }
