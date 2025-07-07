@@ -23,7 +23,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot = {
     initrd.kernelModules = [ "amdgpu" ];
-    kernelPackages = pkgs.linuxPackages_5_10;
   };
   system.stateVersion = "25.05"; # Did you read the comment?
 }
