@@ -43,12 +43,13 @@
     }@inputs:
 
     let
+      system = "x86_64-linux";
       sharedModules = [
         agenix.nixosModules.default
         disko.nixosModules.disko
         home-manager.nixosModules.home-manager
         {
-          home-manager.users.jjy = import ./home/users/jjy/home.nix
+          home-manager.users.jjy = import ./home/users/jjy/home.nix;
           home-manager.backupFileExtension = "backup";
         }
         ({pkgs, config, ...}: {
