@@ -60,6 +60,7 @@ rec {
     ../../programs/neovim
     ../../programs/vscode.nix
     ../../programs/hyprlock.nix
+    ../../programs/waybar.nix
 
     # services
     ../../services/hypridle.nix
