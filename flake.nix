@@ -78,7 +78,6 @@
       homeModules = [
         agenix.homeManagerModules.default
         ./users/jjy/home.nix
-        ./modules/home-hyprland.nix
       ];
 
       nixospkgs = import nixpkgs {

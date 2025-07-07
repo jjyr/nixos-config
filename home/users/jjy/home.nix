@@ -1,6 +1,8 @@
 # home.nix
 { pkgs, nvidia, preventlock, ... }:
 rec {
+  programs.home-manager.enable = true;
+
   home.stateVersion = "25.05";
   home.username = "jjy";
   home.homeDirectory = "/home/jjy";
@@ -69,6 +71,7 @@ rec {
     ../../programs/vscode.nix
     ../../programs/hyprlock.nix
     ../../programs/waybar.nix
+    ../../programs/hyprland.nix
 
     # services
     ../../services/hypridle.nix
@@ -86,5 +89,4 @@ rec {
   #   };
   # };
 
-  programs.home-manager.enable = true;
 }

@@ -1,4 +1,4 @@
-Z
+{
   pkgs,
   inputs,
   nvidia,
@@ -6,10 +6,6 @@ Z
   ...
 }:
 {
-  environment.systemPackages = [pkgs.kitty];
-
-  programs.hyprland.enable = true;
-
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
