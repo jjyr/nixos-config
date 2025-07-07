@@ -39,7 +39,7 @@
       ];
     };
   };
-}
+};
 
 services.xserver.enable = true;
 
