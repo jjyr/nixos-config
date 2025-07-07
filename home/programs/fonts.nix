@@ -35,6 +35,31 @@
       '';
       enableParallelBuilding = true;
     })
+
+    (stdenv.mkDerivation {
+      pname = "CaskaydiaMono-nerd-font";
+      version = "3.4.0";
+      src = fetchzip {
+        url = "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/CascadiaMono.zip";
+        sha256 = "sha256-ci1C2b4WDSnHEG2Cw6YPDWk5swD0bTcNV/cgSUriSfA=";
+        stripRoot = false;
+      };
+      dontConfigure = true;
+      dontBuild = true;
+      installPhase = ''
+        runHook preInstall
+
+        fontdir="$out/share/fonts/truetype"
+        install -d "$fontdir"
+        install "$src/CaskaydiaMonoNerdFont-Regular.ttf" "$fontdir"
+        install "$src/CaskaydiaMonoNerdFont-Bold.ttf" "$fontdir"
+        install "$src/CaskaydiaMonoNerdFont-Italic.ttf" "$fontdir"
+        install "$src/CaskaydiaMonoNerdFont-BoldItalic.ttf" "$fontdir"
+
+        runHook postInstall
+      '';
+      enableParallelBuilding = true;
+    })
   ];
 }
 

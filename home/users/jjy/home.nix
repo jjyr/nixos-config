@@ -89,7 +89,7 @@ rec {
 
   # Wofi
   home.file = {
-    "~/.config/wofi/config".text = /*toml*/ ''
+    "./.config/wofi/config".text = /*toml*/ ''
 width=600
 height=350
 location=center
@@ -107,7 +107,7 @@ image_size=40
 gtk_dark=true
     '';
 
-    "~/.config/wofi/style.css".text = ''
+    "./.config/wofi/style.css".text = ''
 @define-color	selected-text  #7dcfff;
 @define-color	text  #cfc9c2;
 @define-color	base  #1a1b26;
