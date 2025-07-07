@@ -15,6 +15,15 @@ rec {
   xdg.enable = true;
   xdg.portal = {
     enable = true;
+    config = {
+      common = {
+          default = ["hyprland"];
+      };
+      hyprland = {
+          default = ["gtk" "hyprland"];
+      };
+    };
+
     xdgOpenUsePortal = true;
   };
 

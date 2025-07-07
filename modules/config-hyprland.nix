@@ -12,7 +12,8 @@
     portalPackage =
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
-    systemd.variables = ["--all"];
+    systemd = {enable = true; variables = ["--all"];};
+    xwayland.enable = true;
 
     settings = {
       monitor = ",preferred,auto,auto";

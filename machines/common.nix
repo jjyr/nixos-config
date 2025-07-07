@@ -2,9 +2,6 @@
   time.timeZone = "Asia/Shanghai";
 
 
-# Setup keyring
-  services.gnome.gnome-keyring.enable = true;
-
 # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -40,6 +37,12 @@ environment.sessionVariables = {
   XDG_CONFIG_HOME = "$HOME/.config";
   XDG_DATA_HOME = "$HOME/.local/share";
   XDG_BIN_HOME = "$HOME/.local/bin";
+  MOA_ENABLE_WAYLAND = 1;
+  XDG_CURRENT_DESKTOP = "Hyprland";
+  XDG_SESSION_DESKTOP = "Hyprland";
+  XDG_SESSION_TYPE = "wayland";
+  GDK_BACKEND = "wayland,x11";
+  QT_QPA_PLATFORM = "wayland,xcb";
 
   # templates = "${self}/dev-shells";
 };
