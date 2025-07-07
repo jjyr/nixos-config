@@ -6,17 +6,14 @@
   ...
 }:
 {
-  programs = {
-    hyprland = {
-      enable = trie;
-      xwayland.enable = true;
-    };
-  };
+  programs.kitty.enable = true;
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage =
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+
+    systemd.variables = ["--all"];
 
     settings = {
       monitor = ",preferred,auto,auto";
