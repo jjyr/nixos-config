@@ -50,6 +50,7 @@
         home-manager.nixosModules.home-manager
         ./modules/user.nix
         ./modules/network.nix
+        ./modules/hyprland.nix
         ({pkgs, config, ...}: {
           config = {
             nix.settings = {
@@ -76,8 +77,8 @@
       ];
       homeModules = [
         agenix.homeManagerModules.default
-          ./modules/hyprland.nix
-          ./users/jjy/home.nix
+        ./users/jjy/home.nix
+        ./modules/home-hyprland.nix
       ];
 
       nixospkgs = import nixpkgs {
