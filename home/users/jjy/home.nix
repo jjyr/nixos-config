@@ -1,5 +1,5 @@
 # home.nix
-{ pkgs, ... }:
+{ pkgs, nvidia, preventlock, ... }:
 rec {
   home.stateVersion = "25.05";
   home.username = "jjy";
@@ -36,6 +36,7 @@ rec {
     };
   };
 
+
   home.packages = with pkgs; [
 
     # tools
@@ -66,17 +67,17 @@ rec {
     ../../services/hypridle.nix
   ];
 
-  # secrets
-  age = {
-    identityPaths = [ "${home.homeDirectory}/.ssh/id_ed25519.age" ];
-    secrets = {
-      git-credentials = {
-        file = ./secrets/git-credentials.age;
-        path = "${home.homeDirectory}/.git-credentials";
-        mode = "600";
-      };
-    };
-  };
+  # # secrets
+  # age = {
+  #   identityPaths = [ "${home.homeDirectory}/.ssh/id_ed25519.age" ];
+  #   secrets = {
+  #     git-credentials = {
+  #       file = ./secrets/git-credentials.age;
+  #       path = "${home.homeDirectory}/.git-credentials";
+  #       mode = "600";
+  #     };
+  #   };
+  # };
 
   programs.home-manager.enable = true;
 }

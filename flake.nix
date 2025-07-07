@@ -48,10 +48,6 @@
         agenix.nixosModules.default
         disko.nixosModules.disko
         home-manager.nixosModules.home-manager
-        {
-          home-manager.users.jjy = import ./home/users/jjy/home.nix;
-          home-manager.backupFileExtension = "backup";
-        }
         ({pkgs, config, ...}: {
           config = {
             nix.settings = {
@@ -69,10 +65,10 @@
             # use it as an overlay
             nixpkgs.overlays = [ inputs.nixpkgs-wayland.overlay ];
 
-            # or, pull specific packages (built against inputs.nixpkgs, usually `nixos-unstable`)
-            environment.systemPackages = [
-              inputs.nixpkgs-wayland.packages.${system}.waybar
-            ];
+            # # or, pull specific packages (built against inputs.nixpkgs, usually `nixos-unstable`)
+            # environment.systemPackages = [
+            #   inputs.nixpkgs-wayland.packages.${system}.waybar
+            # ];
           };
         })
       ];
@@ -81,6 +77,16 @@
           ./modules/hyprland.nix
           ./users/jjy/home.nix
       ];
+
+      nixospkgs = import nixpkgs {
+        system = "x86_64-linux";
+        config = {allowUnfree = true;};
+      };
+
+      x86pkgs = import nixpkgs {
+        system = "x86_64-linux";
+        config = {allowUnfree = true;};
+      };
     in
     {
 
@@ -94,25 +100,35 @@
       nixosConfigurations = {
         laptop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+
           modules = sharedModules ++ [
             ./machines/laptop/default.nix
+            {
+	      users.users.jjy.isNormalUser = true;
+              home-manager.extraSpecialArgs = {pkgs=nixospkgs; nvidia = false; preventlock = false;};
+              home-manager.users.jjy = ./home/users/jjy/home.nix;
+              home-manager.backupFileExtension = "backup";
+            }
           ];
         };
 
         homepc = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+
           modules = sharedModules ++ [
             ./machines/homepc/default.nix
+            # ({pkgs, ...}: {
+	    #   users.users.jjy.isNormalUser = true;
+            #   home-manager.users.jjy = import ./home/users/jjy/home.nix {nvidia = false; preventlock = false; inherit pkgs;};
+            #   home-manager.backupFileExtension = "backup";
+            # })
           ];
         };
       };
 
       homeConfigurations = {
         "jjy@laptop" = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
+          pkgs = x86pkgs;
           extraSpecialArgs = {
             inherit inputs;
             nvidia = false;
@@ -122,10 +138,7 @@
         };
 
         "jjy@homepc" = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
+          pkgs = x86pkgs;
           extraSpecialArgs = {
             inherit inputs;
             nvidia = true;
