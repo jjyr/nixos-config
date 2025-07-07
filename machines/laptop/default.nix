@@ -4,7 +4,7 @@
     ./hardware-configuration.nix
     ../common.nix
   ];
-  services.xserver.videoDriver = ["amdgpu"];
+  services.xserver.videoDrivers = ["amdgpu"];
   environment.systemPackages = with pkgs; [rocmPackages.amdsmi];
   hardware.graphics = {
     enable = true;

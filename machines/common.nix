@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
 # Enable sddm login manager
   services.displayManager = {
     sddm = {
@@ -15,6 +15,9 @@
       ];
     };
   };
+
+  time.timeZone = "Asia/Shanghai";
+
 
 # Setup keyring
   services.gnome.gnome-keyring.enable = true;
@@ -39,7 +42,7 @@
       ];
     };
   };
-};
+
 
 services.xserver.enable = true;
 
@@ -55,7 +58,7 @@ environment.sessionVariables = {
   XDG_DATA_HOME = "$HOME/.local/share";
   XDG_BIN_HOME = "$HOME/.local/bin";
 
-  templates = "${self}/dev-shells";
+  # templates = "${self}/dev-shells";
 };
 
 environment.systemPackages = with pkgs; [
@@ -72,3 +75,4 @@ environment.systemPackages = with pkgs; [
 # devbox
 # shellify
 ];
+}

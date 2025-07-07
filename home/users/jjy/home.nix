@@ -17,8 +17,6 @@ rec {
     xdgOpenUsePortal = true;
   };
 
-  time.timeZone = "Asia/Shanghai";
-
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
