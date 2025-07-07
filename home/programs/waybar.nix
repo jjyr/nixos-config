@@ -11,8 +11,11 @@
 
   programs.waybar = {
     enable = true;
-    settings = {
-      mainBar = {
+
+    systemd.enable = true;
+
+    settings = [
+      {
         layer = "top";
         position = "top";
         spacing = 0;
@@ -160,8 +163,8 @@
           "tooltip-format" = "{}";
         };
       };
-    };
-    style = ''
+    ];
+    style = "~/.config/waybar" ''
       * {
         border: none;
         border-radius: 0;
