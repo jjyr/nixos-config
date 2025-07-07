@@ -20,6 +20,16 @@
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    waybar = {
+      url = "github:Alexays/waybar";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixpkgs-wayland = {
+      url = "github:nix-community/nixpkgs-wayland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -36,6 +46,34 @@
       sharedModules = [
         agenix.nixosModules.default
         disko.nixosModules.disko
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.users.jjy = import ./home/users/jjy/home.nix
+          home-manager.backupFileExtension = "backup";
+        }
+        ({pkgs, config, ...}: {
+          config = {
+            nix.settings = {
+              # add binary caches
+              trusted-public-keys = [
+                "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+                "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
+              ];
+              substituters = [
+                "https://cache.nixos.org"
+                "https://nixpkgs-wayland.cachix.org"
+              ];
+            };
+
+            # use it as an overlay
+            nixpkgs.overlays = [ inputs.nixpkgs-wayland.overlay ];
+
+            # or, pull specific packages (built against inputs.nixpkgs, usually `nixos-unstable`)
+            environment.systemPackages = [
+              inputs.nixpkgs-wayland.packages.${system}.waybar
+            ];
+          };
+        })
       ];
       homeModules = [
         agenix.homeManagerModules.default
@@ -52,11 +90,20 @@
         trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
       };
 
-      nixosConfigurations.devpc = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = sharedModules ++ [
-          ./machines/devpc/default.nix
-        ];
+      nixosConfigurations = {
+        laptop = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = sharedModules ++ [
+            ./machines/devpc/default.nix
+          ];
+        };
+
+        homepc = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = sharedModules ++ [
+            ./machines/homepc/default.nix
+          ];
+        };
       };
 
       homeConfigurations."jjy@devpc" = home-manager.lib.homeManagerConfiguration {
