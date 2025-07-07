@@ -25,11 +25,6 @@ rec {
       };
     };
 
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-hyprland
-    ];
-
     xdgOpenUsePortal = true;
   };
 
