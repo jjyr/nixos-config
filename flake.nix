@@ -48,6 +48,8 @@
         agenix.nixosModules.default
         disko.nixosModules.disko
         home-manager.nixosModules.home-manager
+        ./modules/user.nix
+        ./modules/network.nix
         ({pkgs, config, ...}: {
           config = {
             nix.settings = {
@@ -104,7 +106,6 @@
           modules = sharedModules ++ [
             ./machines/laptop/default.nix
             {
-	      users.users.jjy.isNormalUser = true;
               home-manager.extraSpecialArgs = {pkgs=nixospkgs; nvidia = false; preventlock = false;};
               home-manager.users.jjy = ./home/users/jjy/home.nix;
               home-manager.backupFileExtension = "backup";
