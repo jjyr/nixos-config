@@ -79,7 +79,4 @@ rec {
   };
 
   programs.home-manager.enable = true;
-  programs.kitty.enable = true;
-  programs.windowManager.hyprland.enable = true;
-
 }

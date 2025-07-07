@@ -6,6 +6,12 @@
   ...
 }:
 {
+  programs = {
+    hyprland = {
+      enable = trie;
+      xwayland.enable = true;
+    };
+  };
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;

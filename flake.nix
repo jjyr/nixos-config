@@ -95,7 +95,7 @@
         laptop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = sharedModules ++ [
-            ./machines/devpc/default.nix
+            ./machines/laptop/default.nix
           ];
         };
 
@@ -107,30 +107,32 @@
         };
       };
 
-      homeConfigurations."jjy@devpc" = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = "x86_64-linux";
-          config.allowUnfree = true;
+      homeConfigurations = {
+        "jjy@laptop" = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+          extraSpecialArgs = {
+            inherit inputs;
+            nvidia = false;
+            preventlock = false;
+          };
+          modules = homeModules;
         };
-        extraSpecialArgs = {
-          inherit inputs;
-          nvidia = false;
-          preventlock = false;
-        };
-        modules = homeModules;
-      };
 
-      homeConfigurations."jjy@homepc" = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = "x86_64-linux";
-          config.allowUnfree = true;
+        "jjy@homepc" = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+          extraSpecialArgs = {
+            inherit inputs;
+            nvidia = true;
+            preventlock = true;
+          };
+          modules = homeModules;
         };
-        extraSpecialArgs = {
-          inherit inputs;
-          nvidia = true;
-          preventlock = true;
-        };
-        modules = homeModules;
       };
 
       systemd.user.services."ssh-agent" = {
