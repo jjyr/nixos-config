@@ -10,6 +10,7 @@ rec {
   home.sessionVariables = {
     EDITOR = "nvim";
     NIX_PATH = "nixpkgs=flake:nixpkgs$\{NIX_PATH:+:$NIX_PATH}";
+    DISPLAY = ":0";
   };
 
   xdg.enable = true;
