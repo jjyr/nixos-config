@@ -2,10 +2,22 @@
   imports = [
     ../../disko-config.nix
     ./hardware-configuration.nix
+    ../common.nix
   ];
-  services.xserver = {
+  services.xserver.videoDriver = ["amdgpu"];
+  environment.systemPackages = with pkgs; [rocmPackages.amdsmi];
+  hardware.graphics = {
     enable = true;
-    xkb = {layout = "us";};
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      amdvlk
+      libvdpau-va-gl
+      vaapiVdpau
+      # vulkan-loader
+      # vulkan-extension-layer
+      # vulkan-validation-layers
+    ];
+    extraPackages32 = with pkgs; [driversi686Linux.amdvlk];
   };
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

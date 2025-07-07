@@ -10,6 +10,15 @@ rec {
     NIX_PATH = "nixpkgs=flake:nixpkgs$\{NIX_PATH:+:$NIX_PATH}";
   };
 
+  xdg.enable = true;
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-hyprland xdg-desktop-portal-gtk ];
+    xdgOpenUsePortal = true;
+  };
+
+  time.timeZone = "Asia/Shanghai";
+
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
