@@ -36,6 +36,7 @@
         in
         lockScreenBind ++
         [
+          "SUPER ALT, ESCAPE, exit"
           "SUPER, return, exec, ${terminal}"
           "SUPER, F, exec, ${fileManager}"
           "SUPER, B, exec, ${browser}"
