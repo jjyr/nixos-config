@@ -65,5 +65,33 @@
       '';
       enableParallelBuilding = true;
     })
+
+    (stdenv.mkDerivation {
+      pname = "mi-sans-font";
+      version = "1.0.0";
+      src = fetchzip {
+        url = "https://hyperos.mi.com/font-download/MiSans.zip";
+        sha256 = "sha256-497H20SYzzUFaUHkqUkYlROLrqXRBLkBkylsRqZ6KfM=";
+        stripRoot = false;
+      };
+      dontConfigure = true;
+      dontBuild = true;
+      installPhase = ''
+        runHook preInstall
+
+        fontdir="$out/share/fonts/truetype"
+        install -d "$fontdir"
+        install "$src/MiSans/ttf/MiSans-Regular.ttf" "$fontdir"
+        install "$src/MiSans/ttf/MiSans-Bold.ttf" "$fontdir"
+        install "$src/MiSans/ttf/MiSans-Normal.ttf" "$fontdir"
+        install "$src/MiSans/ttf/MiSans-Medium.ttf" "$fontdir"
+        install "$src/MiSans/ttf/MiSans-Thin.ttf" "$fontdir"
+        install "$src/MiSans/ttf/MiSans-Light.ttf" "$fontdir"
+        install "$src/MiSans/ttf/MiSans-Heavy.ttf" "$fontdir"
+
+        runHook postInstall
+      '';
+      enableParallelBuilding = true;
+    })
   ];
 }

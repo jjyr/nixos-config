@@ -24,11 +24,14 @@
       ecosystem = {
         no_update_news = true;
       };
+      # Default apps
+      "$terminal" = "alacritty";
+      "$fileManager" = "nautilus --new-window";
+      "$browser" = "chromium --new-window --ozone-platform=wayland";
+      "$webapp" = "$browser --app";
+
       bind =
         let
-          terminal = "alacritty";
-          fileManager = "nautilus --new-window";
-          browser = "chromium --new-window --ozone-platform=wayland";
           lockScreenBind =
             if preventlock then
               [ ]
@@ -47,10 +50,10 @@
           "SUPER ALT, ESCAPE, exit"
 
           # Launch app
-          "SUPER, return, exec, ${terminal}"
-          "SUPER, F, exec, ${fileManager}"
-          "SUPER, B, exec, ${browser}"
-          "SUPER, T, exec, ${terminal} -e btop"
+          "SUPER, return, exec, $terminal"
+          "SUPER, F, exec, $fileManager"
+          "SUPER, B, exec, $browser"
+          "SUPER, T, exec, $terminal -e btop"
           "SUPER, space, exec, flock --nonblock /tmp/.wofi.lock -c \"wofi -- show drun --sort-order=alphabetical\""
           "SUPER_CTRL, space, execr, fcitx5-remote -t"
           "SUPER, O, exec, obsidian --no-sandbox %U --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
