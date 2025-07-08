@@ -43,7 +43,10 @@
         in
         lockScreenBind
         ++ [
+          # Exit hyprland
           "SUPER ALT, ESCAPE, exit"
+
+          # Launch app
           "SUPER, return, exec, ${terminal}"
           "SUPER, F, exec, ${fileManager}"
           "SUPER, B, exec, ${browser}"
@@ -52,6 +55,12 @@
           "SUPER_CTRL, space, execr, fcitx5-remote -t"
           "SUPER, O, exec, obsidian --no-sandbox %U --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
           "SUPER, W, killactive"
+
+          # Notification
+          "SUPER, comma, exec, makoctl dismiss"
+          "SUPER SHIFT, comma, exec, makoctl dismiss --all"
+          "SUPER CTRL, comma, exec, makoctl mode -t dismiss --all"
+          "SUPER CTRL, comma, exec, makoctl mode -t do-not-disturb && makoctl mode | grep -q 'do-not-disturb' && notify-send \"Silenced notifications\" || notify-send \"Enabled notifications\""
 
           # tiling
           "SUPER, J, togglesplit, # dwindle"
