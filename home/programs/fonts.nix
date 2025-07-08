@@ -7,7 +7,24 @@
 
 {
 
-  fonts.fontconfig.enable = true;
+  fonts = {
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        sansSerif = [
+          "MiSans"
+          "CaskaydiaMonoNerdFont"
+        ];
+        serif = [
+          "CaskaydiaMonoNerdFont"
+          "MiSans"
+        ];
+        monospace = [
+          "CaskaydiaMonoNerdFont"
+        ];
+      };
+    };
+  };
 
   home.packages = with pkgs; [
     (stdenv.mkDerivation {

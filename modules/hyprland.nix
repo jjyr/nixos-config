@@ -12,7 +12,6 @@ in
     brightnessctl
     wireplumber
     playerctl
-    nautilus
     blueberry
     pavucontrol
     pamixer

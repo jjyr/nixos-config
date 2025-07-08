@@ -103,6 +103,9 @@ rec {
         "mpv.desktop"
       ];
 
+      "inode/directory" = [
+        "nautilus.desktop"
+      ];
 
       "text/html" = [
         "chromium-browser.desktop"
@@ -131,6 +134,8 @@ rec {
     btop
     nixfmt-rfc-style
     imv
+    sushi
+    nautilus
   ];
 
   # Programs
