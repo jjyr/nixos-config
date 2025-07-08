@@ -85,21 +85,40 @@ rec {
 
     # services
     ../../services/hypridle.nix
+    ../../services/hyprpaper.nix
     ../../../modules/config-hyprland.nix
   ];
 
   services.ssh-agent.enable = true;
 
-  # # secrets
-  # age = {
-  #   identityPaths = [ "${home.homeDirectory}/.ssh/id_ed25519.age" ];
-  #   secrets = {
-  #     git-credentials = {
-  #       file = ./secrets/git-credentials.age;
-  #       path = "${home.homeDirectory}/.git-credentials";
-  #       mode = "600";
-  #     };
-  #   };
-  # };
+# Cursor theme
+  home.pointerCursor = {
+    gtk.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Ice";
+    size = 24;
+  };
+
+  home.file = {
+
+# Default wallpaper
+    "./.config/wallpaper/default.jpg".source = pkgs.fetchurl {
+      url = "https://images.unsplash.com/photo-1651870364199-fc5f9f46ac85";
+      sha256 = "sha256-mjb4rifSKu34xisxSn9LY5JwhW0Ktf8BIM0aV08QYFg=";
+      name = "default.jpg";
+    };
+  };
+
+# # secrets
+# age = {
+#   identityPaths = [ "${home.homeDirectory}/.ssh/id_ed25519.age" ];
+#   secrets = {
+#     git-credentials = {
+#       file = ./secrets/git-credentials.age;
+#       path = "${home.homeDirectory}/.git-credentials";
+#       mode = "600";
+#     };
+#   };
+# };
 
 }
