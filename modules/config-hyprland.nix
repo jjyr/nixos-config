@@ -101,6 +101,20 @@
           "SHIFT, PRINT, exec, hyprshot -m window"
           "CTRL, PRINT, exec, hyprshot -m output"
         ];
+      bindel = [
+",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
+",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+",XF86MonBrightnessUp, exec, brightnessctl -e4 -n2 set 5%+"
+",XF86MonBrightnessDown, exec, brightnessctl -e4 -n2 set 5%-"
+      ];
+      bindl = [
+", XF86AudioNext, exec, playerctl next"
+", XF86AudioPause, exec, playerctl play-pause"
+", XF86AudioPlay, exec, playerctl play-pause"
+", XF86AudioPrev, exec, playerctl previous"
+      ];
 
       # Enable ime
       exec-once = [
@@ -228,7 +242,6 @@
             "OZONE_PLATFORM,wayland"
             # chrome
             "CHROMIUM_FLAGS,\"--enable-features=UseOzonePlatform --ozone-platform=wayland --gtk-version=4\""
-            "XDG_DATA_DIRS,/usr/share:/usr/local/share:~/.local/share"
             "XCOMPOSEFILE,~/.XCompose"
             "GDK_SCALE,2"
             "SSH_AUTH_SOCK,$XDG_RUNTIME_DIR/ssh-agent.socket"

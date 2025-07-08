@@ -11,6 +11,7 @@ rec {
     EDITOR = "nvim";
     NIX_PATH = "nixpkgs=flake:nixpkgs$\{NIX_PATH:+:$NIX_PATH}";
     DISPLAY = ":0";
+    XDG_DATA_DIRS ="${home.homeDirectory}/.local/share:${home.homeDirectory}/.nix-profile/share";
   };
 
   xdg.enable = true;
@@ -86,6 +87,20 @@ rec {
     ../../../modules/config-hyprland.nix
   ];
 
+
+      systemd.user.services."ssh-agent" = {
+        enable = true;
+        description = "SSH key agent";
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = "/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK";
+        };
+        environment = {
+          SSH_AUTH_SOCK = "%t/ssh-agent.socket";
+          DISPLAY = ":0";
+        };
+        wantedBy = "default.target";
+      };
 
   # Wofi
   home.file = {

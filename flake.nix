@@ -152,19 +152,5 @@
           modules = homeModules;
         };
       };
-
-      systemd.user.services."ssh-agent" = {
-        enable = true;
-        description = "SSH key agent";
-        serviceConfig = {
-          Type = "simple";
-          ExecStart = "/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK";
-        };
-        environment = {
-          SSH_AUTH_SOCK = "%t/ssh-agent.socket";
-          DISPLAY = ":0";
-        };
-        wantedBy = "default.target";
-      };
     };
 }
