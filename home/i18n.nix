@@ -1,4 +1,4 @@
-{pkgs,...}:
+{ pkgs, ... }:
 
 {
   i18n.inputMethod = {
@@ -13,4 +13,3 @@
     fcitx5.waylandFrontend = true;
   };
 }
-

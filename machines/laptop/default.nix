@@ -1,11 +1,12 @@
-{inputs, pkgs, ...}: {
+{ inputs, pkgs, ... }:
+{
   imports = [
     ../../disko-config.nix
     ./hardware-configuration.nix
     ../common.nix
   ];
-  services.xserver.videoDrivers = ["amdgpu"];
-  environment.systemPackages = with pkgs; [rocmPackages.amdsmi];
+  services.xserver.videoDrivers = [ "amdgpu" ];
+  environment.systemPackages = with pkgs; [ rocmPackages.amdsmi ];
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -17,7 +18,7 @@
       # vulkan-extension-layer
       # vulkan-validation-layers
     ];
-    extraPackages32 = with pkgs; [driversi686Linux.amdvlk];
+    extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
   };
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

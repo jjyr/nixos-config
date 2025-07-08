@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   programs.vscode = {
@@ -27,7 +32,11 @@
           serverSettings = {
             nil = {
               diagnostics = {
-                ignored = [ "unused_binding" "unused_with" "unused_rec" ];
+                ignored = [
+                  "unused_binding"
+                  "unused_with"
+                  "unused_rec"
+                ];
               };
               formatting = {
                 command = [ "nixpkgs-fmt" ];

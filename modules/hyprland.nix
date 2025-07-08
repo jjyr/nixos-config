@@ -3,9 +3,11 @@
   lib,
   inputs,
   ...
-}: let
+}:
+let
   pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-in{
+in
+{
   environment.systemPackages = with pkgs; [
     brightnessctl
     wireplumber
@@ -20,10 +22,11 @@ in{
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    portalPackage =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
-# avoid mesa version mismatch
+  # avoid mesa version mismatch
   hardware.graphics = {
     package = pkgs-unstable.mesa;
     # if you also want 32-bit support (e.g for Steam)
@@ -31,7 +34,7 @@ in{
     # package32 = pkgs-unstable.pkgsi686Linux.mesa;
   };
 
-# Enable greetd
+  # Enable greetd
   services.greetd = {
     enable = true;
     settings = rec {
@@ -41,18 +44,18 @@ in{
       };
       tuigreet_session =
         let
-        session = "${pkgs.hyprland}/bin/Hyprland";
-      tuigreet = "${lib.getExe pkgs.greetd.tuigreet}";
-      in
-      {
-        command = "${tuigreet} --time --remember --cmd ${session}";
-        user = "greeter";
-      };
+          session = "${pkgs.hyprland}/bin/Hyprland";
+          tuigreet = "${lib.getExe pkgs.greetd.tuigreet}";
+        in
+        {
+          command = "${tuigreet} --time --remember --cmd ${session}";
+          user = "greeter";
+        };
       default_session = tuigreet_session;
     };
   };
 
-# tty service config
+  # tty service config
   systemd.services.greetd.serviceConfig = {
     Type = "idle";
     StandardInput = "tty";

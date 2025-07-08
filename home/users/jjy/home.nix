@@ -1,5 +1,11 @@
 # home.nix
-{ pkgs, inputs, nvidia, preventlock, ... }:
+{
+  pkgs,
+  inputs,
+  nvidia,
+  preventlock,
+  ...
+}:
 rec {
   programs.home-manager.enable = true;
 
@@ -11,7 +17,7 @@ rec {
     EDITOR = "nvim";
     NIX_PATH = "nixpkgs=flake:nixpkgs$\{NIX_PATH:+:$NIX_PATH}";
     DISPLAY = ":0";
-    XDG_DATA_DIRS ="${home.homeDirectory}/.local/share:${home.homeDirectory}/.nix-profile/share";
+    XDG_DATA_DIRS = "${home.homeDirectory}/.local/share:${home.homeDirectory}/.nix-profile/share";
   };
 
   xdg.enable = true;
@@ -19,10 +25,13 @@ rec {
     enable = true;
     config = {
       common = {
-          default = ["hyprland"];
+        default = [ "hyprland" ];
       };
       hyprland = {
-          default = ["gtk" "hyprland"];
+        default = [
+          "gtk"
+          "hyprland"
+        ];
       };
     };
 
@@ -54,7 +63,6 @@ rec {
       ];
     };
   };
-
 
   home.packages = with pkgs; [
 
@@ -91,7 +99,7 @@ rec {
 
   services.ssh-agent.enable = true;
 
-# Cursor theme
+  # Cursor theme
   home.pointerCursor = {
     gtk.enable = true;
     package = pkgs.bibata-cursors;
@@ -101,7 +109,7 @@ rec {
 
   home.file = {
 
-# Default wallpaper
+    # Default wallpaper
     "./.config/wallpaper/default.jpg".source = pkgs.fetchurl {
       url = "https://images.unsplash.com/photo-1651870364199-fc5f9f46ac85";
       sha256 = "sha256-mjb4rifSKu34xisxSn9LY5JwhW0Ktf8BIM0aV08QYFg=";
@@ -109,16 +117,16 @@ rec {
     };
   };
 
-# # secrets
-# age = {
-#   identityPaths = [ "${home.homeDirectory}/.ssh/id_ed25519.age" ];
-#   secrets = {
-#     git-credentials = {
-#       file = ./secrets/git-credentials.age;
-#       path = "${home.homeDirectory}/.git-credentials";
-#       mode = "600";
-#     };
-#   };
-# };
+  # # secrets
+  # age = {
+  #   identityPaths = [ "${home.homeDirectory}/.ssh/id_ed25519.age" ];
+  #   secrets = {
+  #     git-credentials = {
+  #       file = ./secrets/git-credentials.age;
+  #       path = "${home.homeDirectory}/.git-credentials";
+  #       mode = "600";
+  #     };
+  #   };
+  # };
 
 }

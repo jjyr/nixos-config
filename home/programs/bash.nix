@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   home.packages = [
@@ -22,7 +27,6 @@
   programs.bash.shellAliases = {
     ls = "eza";
   };
-
 
   # programs.bash.sessionVariables = {
   # SSH_AGENT_PID="";

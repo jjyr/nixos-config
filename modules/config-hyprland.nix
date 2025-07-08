@@ -9,7 +9,10 @@
   wayland.windowManager.hyprland = {
     enable = true;
 
-    systemd = {enable = true; variables = ["--all"];};
+    systemd = {
+      enable = true;
+      variables = [ "--all" ];
+    };
     xwayland.enable = true;
 
     settings = {
@@ -26,16 +29,20 @@
           terminal = "alacritty";
           fileManager = "nautilus --new-window";
           browser = "chromium --new-window --ozone-platform=wayland";
-          lockScreenBind = if preventlock then [] else [
+          lockScreenBind =
+            if preventlock then
+              [ ]
+            else
+              [
 
-            # end sessions
-            "SUPER, ESCAPE, exec, hyprlock"
-            "SUPER SHIFT, ESCAPE, exec, systemctl suspend"
+                # end sessions
+                "SUPER, ESCAPE, exec, hyprlock"
+                "SUPER SHIFT, ESCAPE, exec, systemctl suspend"
 
-          ];
+              ];
         in
-        lockScreenBind ++
-        [
+        lockScreenBind
+        ++ [
           "SUPER ALT, ESCAPE, exit"
           "SUPER, return, exec, ${terminal}"
           "SUPER, F, exec, ${fileManager}"
@@ -102,18 +109,18 @@
           "CTRL, PRINT, exec, hyprshot -m output"
         ];
       bindel = [
-",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
-",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-",XF86MonBrightnessUp, exec, brightnessctl -e4 -n2 set 5%+"
-",XF86MonBrightnessDown, exec, brightnessctl -e4 -n2 set 5%-"
+        ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
+        ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        ",XF86MonBrightnessUp, exec, brightnessctl -e4 -n2 set 5%+"
+        ",XF86MonBrightnessDown, exec, brightnessctl -e4 -n2 set 5%-"
       ];
       bindl = [
-", XF86AudioNext, exec, playerctl next"
-", XF86AudioPause, exec, playerctl play-pause"
-", XF86AudioPlay, exec, playerctl play-pause"
-", XF86AudioPrev, exec, playerctl previous"
+        ", XF86AudioNext, exec, playerctl next"
+        ", XF86AudioPause, exec, playerctl play-pause"
+        ", XF86AudioPlay, exec, playerctl play-pause"
+        ", XF86AudioPrev, exec, playerctl previous"
       ];
 
       # Enable ime
@@ -290,4 +297,3 @@
   };
 
 }
-

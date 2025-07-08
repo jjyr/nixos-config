@@ -2,14 +2,14 @@
   config,
   pkgs,
   home,
-    ...
+  ...
 }:
 
 rec {
   home.packages = with pkgs; [
     hyprpaper
   ];
-# config wallpaper
+  # config wallpaper
   services.hyprpaper = {
     enable = true;
     settings = {

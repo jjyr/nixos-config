@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   home.packages = with pkgs; [
@@ -14,10 +19,18 @@
       ".go/"
     ];
     extraConfig = {
-      init = { defaultBranch = "main"; };
-      pull = { rebase = true; };
-      push = { autoSetupRemote = true; };
-      merge = { conflictstyle = "diff3"; };
+      init = {
+        defaultBranch = "main";
+      };
+      pull = {
+        rebase = true;
+      };
+      push = {
+        autoSetupRemote = true;
+      };
+      merge = {
+        conflictstyle = "diff3";
+      };
       # timeout after 90 days
       credential.helper = "cache --timeout=7776000";
     };
