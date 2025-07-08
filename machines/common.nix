@@ -47,6 +47,5 @@ environment.sessionVariables = {
 environment.systemPackages = with pkgs; [
   gcc
   killall
-  wofi
 ];
 }

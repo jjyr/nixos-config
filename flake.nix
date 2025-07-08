@@ -51,6 +51,7 @@
         ./modules/user.nix
         ./modules/network.nix
         ./modules/hyprland.nix
+        ./modules/nix-options.nix
         ({pkgs, config, ...}: {
           config = {
             nix.settings = {
