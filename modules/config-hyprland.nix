@@ -244,7 +244,7 @@
             "CHROMIUM_FLAGS,\"--enable-features=UseOzonePlatform --ozone-platform=wayland --gtk-version=4\""
             "XCOMPOSEFILE,~/.XCompose"
             "GDK_SCALE,2"
-            "SSH_AUTH_SOCK,$XDG_RUNTIME_DIR/ssh-agent.socket"
+            "SSH_AUTH_SOCK,$XDG_RUNTIME_DIR/ssh-agent"
           ];
         in
         if nvidia then

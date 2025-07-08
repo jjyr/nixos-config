@@ -6,7 +6,11 @@
 }: let
   pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in{
-  environment.systemPackages = [pkgs.kitty];
+  environment.systemPackages = with pkgs; [
+    brightnessctl
+    wireplumber
+    playerctl
+  ];
 
   programs.hyprland = {
     enable = true;
