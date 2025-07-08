@@ -180,17 +180,4 @@ rec {
       name = "default.jpg";
     };
   };
-
-  # # secrets
-  # age = {
-  #   identityPaths = [ "${home.homeDirectory}/.ssh/id_ed25519.age" ];
-  #   secrets = {
-  #     git-credentials = {
-  #       file = ./secrets/git-credentials.age;
-  #       path = "${home.homeDirectory}/.git-credentials";
-  #       mode = "600";
-  #     };
-  #   };
-  # };
-
 }
