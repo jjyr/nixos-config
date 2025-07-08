@@ -17,6 +17,8 @@ in
     pavucontrol
     pamixer
     hyprcursor
+    hyprpolkitagent
+    mako
   ];
 
   programs.hyprland = {

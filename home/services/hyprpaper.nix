@@ -5,7 +5,7 @@
   ...
 }:
 
-rec {
+{
   home.packages = with pkgs; [
     hyprpaper
   ];
