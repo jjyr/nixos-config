@@ -24,6 +24,7 @@
   nixpkgs.config.allowUnfree = true;
 
   services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.opengl.enable = true;
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -37,6 +38,11 @@
     open = true;
     nvidiaSettings = true;
   };
+
+  boot.kernelParams = [
+    "nvidia-drm.modeset=1"
+    "nvidia-drm.fbdev=1"
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
