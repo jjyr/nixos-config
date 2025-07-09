@@ -28,6 +28,9 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
+  # Enable tailscale
+  services.tailscale.enable = true;
+
   environment.sessionVariables = {
     # These are the defaults, and xdg.enable does set them, but due to load
     # order, they're not set before environment.variables are set, which could
