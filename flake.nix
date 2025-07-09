@@ -36,59 +36,13 @@
     {
       self,
       nixpkgs,
-      home-manager,
-      agenix,
-      disko,
       ...
     }@inputs:
 
     let
-      system = "x86_64-linux";
-      sharedModules = [
-        agenix.nixosModules.default
-        disko.nixosModules.disko
-        home-manager.nixosModules.home-manager
-        ./modules/user.nix
-        ./modules/network.nix
-        ./modules/hyprland.nix
-        ./modules/nix-options.nix
-        ({pkgs, config, ...}: {
-          config = {
-            nix.settings = {
-              # add binary caches
-              trusted-public-keys = [
-                "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-                "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
-              ];
-              substituters = [
-                "https://cache.nixos.org"
-                "https://nixpkgs-wayland.cachix.org"
-              ];
-            };
-
-            # use it as an overlay
-            nixpkgs.overlays = [ inputs.nixpkgs-wayland.overlay ];
-
-            # # or, pull specific packages (built against inputs.nixpkgs, usually `nixos-unstable`)
-            # environment.systemPackages = [
-            #   inputs.nixpkgs-wayland.packages.${system}.waybar
-            # ];
-          };
-        })
-      ];
-      homeModules = [
-        agenix.homeManagerModules.default
-        ./users/jjy/home.nix
-      ];
-
-      nixospkgs = import nixpkgs {
-        system = "x86_64-linux";
-        config = {allowUnfree = true;};
-      };
-
-      x86pkgs = import nixpkgs {
-        system = "x86_64-linux";
-        config = {allowUnfree = true;};
+      mkSystem = import ./lib/mksystem.nix {
+        inherit inputs;
+        inherit nixpkgs;
       };
     in
     {
@@ -101,56 +55,16 @@
       };
 
       nixosConfigurations = {
-        laptop = nixpkgs.lib.nixosSystem {
+        laptop = mkSystem {
+          name = "laptop";
           system = "x86_64-linux";
-
-          specialArgs = {
-            inherit inputs;
-          };
-
-          modules = sharedModules ++ [
-            ./machines/laptop/default.nix
-            {
-              home-manager.extraSpecialArgs = {pkgs=nixospkgs; nvidia = false; preventlock = false; inherit inputs;};
-              home-manager.users.jjy = ./home/users/jjy/home.nix;
-              home-manager.backupFileExtension = "backup";
-            }
-          ];
         };
 
-        homepc = nixpkgs.lib.nixosSystem {
+        homepc = mkSystem {
+          name = "homepc";
           system = "x86_64-linux";
-
-          modules = sharedModules ++ [
-            ./machines/homepc/default.nix
-            # ({pkgs, ...}: {
-	    #   users.users.jjy.isNormalUser = true;
-            #   home-manager.users.jjy = import ./home/users/jjy/home.nix {nvidia = false; preventlock = false; inherit pkgs;};
-            #   home-manager.backupFileExtension = "backup";
-            # })
-          ];
-        };
-      };
-
-      homeConfigurations = {
-        "jjy@laptop" = home-manager.lib.homeManagerConfiguration {
-          pkgs = x86pkgs;
-          extraSpecialArgs = {
-            inherit inputs;
-            nvidia = false;
-            preventlock = false;
-          };
-          modules = homeModules;
-        };
-
-        "jjy@homepc" = home-manager.lib.homeManagerConfiguration {
-          pkgs = x86pkgs;
-          extraSpecialArgs = {
-            inherit inputs;
-            nvidia = true;
-            preventlock = true;
-          };
-          modules = homeModules;
+          nvidia = true;
+          preventlock = true;
         };
       };
     };
