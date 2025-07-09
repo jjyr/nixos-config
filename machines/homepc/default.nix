@@ -18,7 +18,7 @@
   ];
 
   # nvidia
-  environment.systemPakcage = with pkgs; [
+  environment.systemPackages = with pkgs; [
     egl-wayland
   ];
   nixpkgs.config.allowUnfree = true;
