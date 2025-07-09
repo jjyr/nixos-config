@@ -64,8 +64,8 @@
           "on-click" = "alacritty -e btop";
         };
         "clock" = {
-          "format" = "{:%A %H:%M}";
-          "format-alt" = "{:%d %B W%V %Y}";
+          "format" = "{:%b %d %a %H:%M}";
+          "format-alt" = "{:%y %b %d %H:%M}";
           "tooltip" = false;
         };
         "network" = {

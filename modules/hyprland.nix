@@ -17,7 +17,11 @@ in
     pamixer
     hyprcursor
     hyprpolkitagent
+    #notification
     mako
+    # clipboard
+    wl-clip-persist
+    clipse
   ];
 
   programs.hyprland = {

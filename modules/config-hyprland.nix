@@ -119,6 +119,8 @@
           ", PRINT, exec, hyprshot -m region"
           "SHIFT, PRINT, exec, hyprshot -m window"
           "CTRL, PRINT, exec, hyprshot -m output"
+          # Clipse
+          "CTRL SUPER, V, exec, $terminal --class clipse -e clipse"
         ];
       bindel = [
         ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
@@ -135,11 +137,13 @@
         ", XF86AudioPrev, exec, playerctl previous"
       ];
 
-      # Enable ime
       exec-once = [
+        # Enable ime
         "fcitx5-remote -r"
         "fcitx5-remote -d --replace &"
         "fcitx5-remote -r"
+        # clipboard
+        "wl-clip-persist --clipboard regular & clipse -listen"
       ];
 
       # input
