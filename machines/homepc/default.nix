@@ -6,6 +6,8 @@
     ../common.nix
   ];
 
+  networking.hostName = "homepc";
+
   services.openssh = {
     enable = true;
     settings = {

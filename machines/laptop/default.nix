@@ -1,5 +1,7 @@
 { inputs, pkgs, ... }:
 {
+  networking.hostName = "laptop";
+
   imports = [
     ./disko-config.nix
     ./hardware-configuration.nix
