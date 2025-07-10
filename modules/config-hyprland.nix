@@ -135,6 +135,8 @@
         "fcitx5-remote -r"
         # clipboard
         "wl-clip-persist --clipboard regular & clipse -listen"
+        # gnome keyring
+        "gnome-keyring-daemon --start --components=secrets"
       ];
 
       # input
