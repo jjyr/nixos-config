@@ -64,7 +64,6 @@
           name = "homepc";
           system = "x86_64-linux";
           nvidia = true;
-          preventlock = true;
         };
       };
     };

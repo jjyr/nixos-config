@@ -2,7 +2,6 @@
   pkgs,
   inputs,
   nvidia,
-  preventlock,
   ...
 }:
 {
@@ -30,98 +29,87 @@
       "$browser" = "chromium --new-window --ozone-platform=wayland";
       "$webapp" = "$browser --app";
 
-      bind =
-        let
-          lockScreenBind =
-            if preventlock then
-              [ ]
-            else
-              [
+      bind = [
+        # Exit hyprland
+        "SUPER ALT, ESCAPE, exit"
 
-                # end sessions
-                "SUPER, ESCAPE, exec, hyprlock"
-                "SUPER SHIFT, ESCAPE, exec, systemctl suspend"
+        # end sessions
+        "SUPER, ESCAPE, exec, hyprlock"
+        "SUPER SHIFT, ESCAPE, exec, systemctl suspend"
 
-              ];
-        in
-        lockScreenBind
-        ++ [
-          # Exit hyprland
-          "SUPER ALT, ESCAPE, exit"
+        # Launch app
+        "SUPER, return, exec, $terminal"
+        "SUPER, F, exec, $fileManager"
+        "SUPER, B, exec, $browser"
+        "SUPER, T, exec, $terminal -e btop"
+        "SUPER, space, exec, flock --nonblock /tmp/.wofi.lock -c \"wofi -- show drun --sort-order=alphabetical\""
+        "SUPER_CTRL, space, execr, fcitx5-remote -t"
+        "SUPER, O, exec, obsidian --no-sandbox %U --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
+        "SUPER, W, killactive"
 
-          # Launch app
-          "SUPER, return, exec, $terminal"
-          "SUPER, F, exec, $fileManager"
-          "SUPER, B, exec, $browser"
-          "SUPER, T, exec, $terminal -e btop"
-          "SUPER, space, exec, flock --nonblock /tmp/.wofi.lock -c \"wofi -- show drun --sort-order=alphabetical\""
-          "SUPER_CTRL, space, execr, fcitx5-remote -t"
-          "SUPER, O, exec, obsidian --no-sandbox %U --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
-          "SUPER, W, killactive"
+        # Notification
+        "SUPER, comma, exec, makoctl dismiss"
+        "SUPER SHIFT, comma, exec, makoctl dismiss --all"
+        "SUPER CTRL, comma, exec, makoctl mode -t dismiss --all"
+        "SUPER CTRL, comma, exec, makoctl mode -t do-not-disturb && makoctl mode | grep -q 'do-not-disturb' && notify-send \"Silenced notifications\" || notify-send \"Enabled notifications\""
 
-          # Notification
-          "SUPER, comma, exec, makoctl dismiss"
-          "SUPER SHIFT, comma, exec, makoctl dismiss --all"
-          "SUPER CTRL, comma, exec, makoctl mode -t dismiss --all"
-          "SUPER CTRL, comma, exec, makoctl mode -t do-not-disturb && makoctl mode | grep -q 'do-not-disturb' && notify-send \"Silenced notifications\" || notify-send \"Enabled notifications\""
+        # tiling
+        "SUPER, J, togglesplit, # dwindle"
+        "SUPER, P, pseudo, # dwindle"
+        "SUPER, V, togglefloating,"
 
-          # tiling
-          "SUPER, J, togglesplit, # dwindle"
-          "SUPER, P, pseudo, # dwindle"
-          "SUPER, V, togglefloating,"
+        # move focus
+        "SUPER, left, movefocus, l"
+        "SUPER, right, movefocus, r"
+        "SUPER, up, movefocus, u"
+        "SUPER, down, movefocus, d"
 
-          # move focus
-          "SUPER, left, movefocus, l"
-          "SUPER, right, movefocus, r"
-          "SUPER, up, movefocus, u"
-          "SUPER, down, movefocus, d"
+        # switch workspaces
+        "SUPER, 1, workspace, 1"
+        "SUPER, 2, workspace, 2"
+        "SUPER, 3, workspace, 3"
+        "SUPER, 4, workspace, 4"
+        "SUPER, 5, workspace, 5"
+        "SUPER, 6, workspace, 6"
+        "SUPER, 7, workspace, 7"
+        "SUPER, 8, workspace, 8"
+        "SUPER, 9, workspace, 9"
+        "SUPER, 0, workspace, 10"
+        # Move active window to a workspace with mainMod + SHIFT + [0-9]
+        "SUPER SHIFT, 1, movetoworkspace, 1"
+        "SUPER SHIFT, 2, movetoworkspace, 2"
+        "SUPER SHIFT, 3, movetoworkspace, 3"
+        "SUPER SHIFT, 4, movetoworkspace, 4"
+        "SUPER SHIFT, 5, movetoworkspace, 5"
+        "SUPER SHIFT, 6, movetoworkspace, 6"
+        "SUPER SHIFT, 7, movetoworkspace, 7"
+        "SUPER SHIFT, 8, movetoworkspace, 8"
+        "SUPER SHIFT, 9, movetoworkspace, 9"
+        "SUPER SHIFT, 0, movetoworkspace, 10"
 
-          # switch workspaces
-          "SUPER, 1, workspace, 1"
-          "SUPER, 2, workspace, 2"
-          "SUPER, 3, workspace, 3"
-          "SUPER, 4, workspace, 4"
-          "SUPER, 5, workspace, 5"
-          "SUPER, 6, workspace, 6"
-          "SUPER, 7, workspace, 7"
-          "SUPER, 8, workspace, 8"
-          "SUPER, 9, workspace, 9"
-          "SUPER, 0, workspace, 10"
-          # Move active window to a workspace with mainMod + SHIFT + [0-9]
-          "SUPER SHIFT, 1, movetoworkspace, 1"
-          "SUPER SHIFT, 2, movetoworkspace, 2"
-          "SUPER SHIFT, 3, movetoworkspace, 3"
-          "SUPER SHIFT, 4, movetoworkspace, 4"
-          "SUPER SHIFT, 5, movetoworkspace, 5"
-          "SUPER SHIFT, 6, movetoworkspace, 6"
-          "SUPER SHIFT, 7, movetoworkspace, 7"
-          "SUPER SHIFT, 8, movetoworkspace, 8"
-          "SUPER SHIFT, 9, movetoworkspace, 9"
-          "SUPER SHIFT, 0, movetoworkspace, 10"
+        # Swap active window with the one next to it with mainMod + SHIFT + arrow keys
+        "SUPER SHIFT, left, swapwindow, l"
+        "SUPER SHIFT, right, swapwindow, r"
+        "SUPER SHIFT, up, swapwindow, u"
+        "SUPER SHIFT, down, swapwindow, d"
 
-          # Swap active window with the one next to it with mainMod + SHIFT + arrow keys
-          "SUPER SHIFT, left, swapwindow, l"
-          "SUPER SHIFT, right, swapwindow, r"
-          "SUPER SHIFT, up, swapwindow, u"
-          "SUPER SHIFT, down, swapwindow, d"
+        # Resize active window
+        "SUPER, minus, resizeactive, -100 0"
+        "SUPER, equal, resizeactive, 100 0"
+        "SUPER SHIFT, minus, resizeactive, 0 -100"
+        "SUPER SHIFT, equal, resizeactive, 0 100"
 
-          # Resize active window
-          "SUPER, minus, resizeactive, -100 0"
-          "SUPER, equal, resizeactive, 100 0"
-          "SUPER SHIFT, minus, resizeactive, 0 -100"
-          "SUPER SHIFT, equal, resizeactive, 0 100"
+        # Scroll through existing workspaces with mainMod + scroll
+        "SUPER, mouse_down, workspace, e+1"
+        "SUPER, mouse_up, workspace, e-1"
 
-          # Scroll through existing workspaces with mainMod + scroll
-          "SUPER, mouse_down, workspace, e+1"
-          "SUPER, mouse_up, workspace, e-1"
-
-          # screenshot
-          ", PRINT, exec, hyprshot -m region"
-          "SHIFT, PRINT, exec, hyprshot -m window"
-          "CTRL, PRINT, exec, hyprshot -m output"
-          # Clipse
-          "CTRL SUPER, V, exec, $terminal --class clipse -e clipse"
-        ];
+        # screenshot
+        ", PRINT, exec, hyprshot -m region"
+        "SHIFT, PRINT, exec, hyprshot -m window"
+        "CTRL, PRINT, exec, hyprshot -m output"
+        # Clipse
+        "CTRL SUPER, V, exec, $terminal --class clipse -e clipse"
+      ];
       bindel = [
         ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
         ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"

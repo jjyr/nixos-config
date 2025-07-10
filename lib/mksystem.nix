@@ -7,7 +7,6 @@
   name,
   system,
   nvidia ? false,
-  preventlock ? false,
 }:
 
 let
@@ -69,7 +68,6 @@ nixpkgs.lib.nixosSystem {
       home-manager.extraSpecialArgs = {
         pkgs = nixospkgs;
         inherit nvidia;
-        inherit preventlock;
         inherit inputs;
       };
       home-manager.users.jjy = ../home/users/jjy/home.nix;
