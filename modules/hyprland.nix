@@ -4,9 +4,7 @@
   inputs,
   ...
 }:
-let
-  pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-in
+
 {
   environment.systemPackages = with pkgs; [
     brightnessctl
@@ -17,26 +15,52 @@ in
     pamixer
     hyprcursor
     hyprpolkitagent
+    hyprshot
     #notification
     mako
     # clipboard
     wl-clip-persist
     clipse
+    # to fix some features such as open link or folder
+    xdg-utils
   ];
+
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+
+    config = {
+      common = {
+        default = "gtk";
+      };
+      hyprland.default = [
+        "gtk"
+        "hyprland"
+      ];
+    };
+
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland
+    ];
+
+  };
 
   programs.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage =
-      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    withUWSM = true;
+    xwayland.enable = true;
+    # package = pkgs.hyprland;
+    # portalPackage =
+    #  inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
   # avoid mesa version mismatch
   hardware.graphics = {
-    package = pkgs-unstable.mesa;
+    package = pkgs.mesa;
     # if you also want 32-bit support (e.g for Steam)
     # enable32Bit = true;
-    # package32 = pkgs-unstable.pkgsi686Linux.mesa;
+    # package32 = pkgs.pkgsi686Linux.mesa;
   };
 
   # Enable greetd

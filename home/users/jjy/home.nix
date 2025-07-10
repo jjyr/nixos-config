@@ -19,24 +19,6 @@ rec {
     XDG_DATA_DIRS = "${home.homeDirectory}/.local/share:${home.homeDirectory}/.nix-profile/share";
   };
 
-  xdg.enable = true;
-  xdg.portal = {
-    enable = true;
-    config = {
-      common = {
-        default = [ "hyprland" ];
-      };
-      hyprland = {
-        default = [
-          "gtk"
-          "hyprland"
-        ];
-      };
-    };
-
-    xdgOpenUsePortal = true;
-  };
-
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
@@ -161,7 +143,6 @@ rec {
   ];
 
   services.ssh-agent.enable = true;
-  services.hyprpolkitagent.enable = true;
 
   # Cursor theme
   home.pointerCursor = {

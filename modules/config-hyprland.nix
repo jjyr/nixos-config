@@ -8,11 +8,14 @@
   wayland.windowManager.hyprland = {
     enable = true;
 
+    # avoid version conflict
+    package = null;
+    portalPackage = null;
+
     systemd = {
       enable = true;
       variables = [ "--all" ];
     };
-    xwayland.enable = true;
 
     settings = {
       monitor = ",preferred,auto,auto";
