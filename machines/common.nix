@@ -28,6 +28,9 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
+  # power profile
+  services.power-profiles-daemon.enable = true;
+
   # Enable tailscale
   services.tailscale.enable = true;
 

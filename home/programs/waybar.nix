@@ -153,15 +153,6 @@
             "performance" = "󰡴";
           };
         };
-        "custom/dropbox" = {
-          "format" = "";
-          "on-click" = "nautilus ~/Dropbox";
-          "exec" = "dropbox-cli status";
-          "return-type" = "text";
-          "interval" = 5;
-          "tooltip" = true;
-          "tooltip-format" = "{}";
-        };
       }
     ];
     style = ''
@@ -183,7 +174,6 @@
         margin-right: 3px;
       }
 
-      #custom-dropbox,
       #cpu,
       #power-profiles-daemon,
       #battery,
