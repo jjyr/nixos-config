@@ -34,6 +34,41 @@
   # Enable tailscale
   services.tailscale.enable = true;
 
+  # keyring
+  services.dbus.enable = true;
+  services.dbus.packages = with pkgs; [
+    libsecret
+    gcr_4
+  ];
+  programs.gnupg = {
+    dirmngr.enable = true;
+    agent = {
+      enable = true;
+      enableBrowserSocket = true;
+      enableSSHSupport = false;
+      pinentryPackage = pkgs.pinentry-gnome3;
+    };
+  };
+  programs.ssh = {
+    startAgent = false;
+    enableAskPassword = true;
+    askPassword = "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
+  };
+  environment.variables.SSH_ASKPASS_REQUIRE = "prefer";
+  services.gnome.gnome-keyring.enable = true;
+  programs.seahorse.enable = true;
+
+  # pam service
+  security.pam.services = {
+    sudo.nodelay = true;
+    hyprlock = {
+      nodelay = true;
+      enableGnomeKeyring = true;
+    };
+    greetd.enableGnomeKeyring = true;
+  };
+
+  # env
   environment.sessionVariables = {
     # These are the defaults, and xdg.enable does set them, but due to load
     # order, they're not set before environment.variables are set, which could
@@ -52,5 +87,6 @@
   environment.systemPackages = with pkgs; [
     gcc
     killall
+    libsecret
   ];
 }

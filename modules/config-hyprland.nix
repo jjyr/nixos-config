@@ -136,7 +136,7 @@
         # clipboard
         "wl-clip-persist --clipboard regular & clipse -listen"
         # gnome keyring
-        "gnome-keyring-daemon --start --components=secrets"
+        "gnome-keyring-daemon --start --components=pkcs11,secrets,ssh"
       ];
 
       # input
@@ -244,34 +244,36 @@
 
       env =
         let
-          ENV = [
-            # cursor
-            "XCURSOR_SIZE,24"
-            "HYPRCURSOR_SIZE,24"
-            # force wayland
-            "GDK_BACKEND,wayland"
-            "QT_QPA_PLATFORM,wayland"
-            "QT_STYLE_OVERRIDE,kvantum"
-            "SDL_VIDEODRIVER,wayland"
-            "MOZ_ENABLE_WAYLAND,1"
-            "ELECTRON_OZONE_PLATFORM_HINT,wayland"
-            "OZONE_PLATFORM,wayland"
-            # chrome
-            "CHROMIUM_FLAGS,\"--enable-features=UseOzonePlatform --ozone-platform=wayland --gtk-version=4\""
-            "XCOMPOSEFILE,~/.XCompose"
-            "GDK_SCALE,2"
-            "SSH_AUTH_SOCK,$XDG_RUNTIME_DIR/ssh-agent"
-          ];
+          extraEnv =
+            if nvidia then
+              [
+                "NVD_BACKEND,direct"
+                "LIBVA_DRIVER_NAME,nvidia"
+                "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+              ]
+            else
+              [ ];
         in
-        if nvidia then
-          [
-            "NVD_BACKEND,direct"
-            "LIBVA_DRIVER_NAME,nvidia"
-            "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-          ]
-          ++ ENV
-        else
-          ENV;
+        extraEnv
+        ++ [
+          # cursor
+          "XCURSOR_SIZE,24"
+          "HYPRCURSOR_SIZE,24"
+          # force wayland
+          "GDK_BACKEND,wayland"
+          "QT_QPA_PLATFORM,wayland"
+          "QT_STYLE_OVERRIDE,kvantum"
+          "SDL_VIDEODRIVER,wayland"
+          "MOZ_ENABLE_WAYLAND,1"
+          "ELECTRON_OZONE_PLATFORM_HINT,wayland"
+          "OZONE_PLATFORM,wayland"
+          # chrome
+          "CHROMIUM_FLAGS,\"--enable-features=UseOzonePlatform --ozone-platform=wayland --gtk-version=4\""
+          "XCOMPOSEFILE,~/.XCompose"
+          "GDK_SCALE,2"
+          "SSH_AUTH_SOCK,$XDG_RUNTIME_DIR/gcr/ssh"
+          "GNOME_KEYRING_CONTROL,$XDG_RUNTIME_DIR/keyring"
+        ];
 
       # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
       windowrule = [

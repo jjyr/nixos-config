@@ -45,11 +45,6 @@ nixpkgs.lib.nixosSystem {
 
           # use it as an overlay
           nixpkgs.overlays = [ inputs.nixpkgs-wayland.overlay ];
-
-          # # or, pull specific packages (built against inputs.nixpkgs, usually `nixos-unstable`)
-          # environment.systemPackages = [
-          #   inputs.nixpkgs-wayland.packages.${system}.waybar
-          # ];
         };
       }
     )
