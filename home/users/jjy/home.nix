@@ -162,6 +162,7 @@ rec {
   ];
 
   services.ssh-agent.enable = true;
+  services.hyprpolkitagent.enable = true;
 
   # Cursor theme
   home.pointerCursor = {
