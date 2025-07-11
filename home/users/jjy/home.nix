@@ -152,6 +152,11 @@ rec {
     size = 24;
   };
 
+  programs.ssh = {
+    enable = true;
+    forwardAgent = true;
+  };
+
   home.file = {
 
     # Default wallpaper
@@ -160,5 +165,13 @@ rec {
       sha256 = "sha256-mjb4rifSKu34xisxSn9LY5JwhW0Ktf8BIM0aV08QYFg=";
       name = "default.jpg";
     };
+
+    # ssh
+    "./.ssh/config".text = ''
+      Host homepc
+      HostName homepc
+      User jjy
+      ForwardAgent yes
+    '';
   };
 }
