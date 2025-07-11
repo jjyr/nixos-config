@@ -48,5 +48,19 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = 1;
+    "net.ipv6.conf.all.forwarding" = 1;
+  };
+
+  # networking
+  networking.interfaces.enp42s0.ipv4.routes = [
+    {
+      address = "100.64.0.0";
+      prefixLength = 10;
+      via = "192.168.50.1";
+    }
+  ];
+
   system.stateVersion = "25.05"; # Did you read the comment?
 }

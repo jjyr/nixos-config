@@ -32,7 +32,11 @@
   services.power-profiles-daemon.enable = true;
 
   # Enable tailscale
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "both";
+  };
+  networking.firewall.checkReversePath = "loose";
 
   # keyring
   services.dbus.enable = true;
