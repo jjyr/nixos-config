@@ -173,5 +173,8 @@ rec {
       User jjy
       ForwardAgent yes
     '';
+
+    # scripts
+    "./.local/bin/show-power-menu".source = ./scripts/show-power-menu;
   };
 }

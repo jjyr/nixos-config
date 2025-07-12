@@ -59,6 +59,7 @@
     askPassword = "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
   };
   environment.variables.SSH_ASKPASS_REQUIRE = "prefer";
+  environment.localBinInPath = true;
   services.gnome.gnome-keyring.enable = true;
   programs.seahorse.enable = true;
 

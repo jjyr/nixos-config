@@ -35,6 +35,22 @@
       @define-color	selected-text  #7dcfff;
       @define-color	text  #cfc9c2;
       @define-color	base  #1a1b26;
+      @define-color	border  #33ccff;
+    '';
+
+    "./.config/wofi/select.css".text = ''
+      @import ".config/wofi/style.css";
+      @import ".local/wofi/style.css";
+
+      #input {
+          display: none;
+          opacity: 0;
+          margin-top: -200px;
+      }
+    '';
+
+    "./.config/wofi/search.css".text = ''
+      @import ".config/wofi/style.css";
 
       * {
         font-family: 'CaskaydiaMono Nerd Font', monospace;
@@ -60,6 +76,7 @@
         padding: 20px;
         border: none;
         background-color: @base;
+        border: 2px solid @border;
       }
 
       #scroll {

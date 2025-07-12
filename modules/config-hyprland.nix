@@ -37,7 +37,8 @@
         "SUPER ALT, ESCAPE, exit"
 
         # end sessions
-        "SUPER, ESCAPE, exec, hyprlock"
+        "SUPER, L, exec, hyprlock"
+        "SUPER, ESCAPE, exec, show-power-menu"
         "SUPER SHIFT, ESCAPE, exec, systemctl suspend"
 
         # Launch app
@@ -45,7 +46,7 @@
         "SUPER, F, exec, $fileManager"
         "SUPER, B, exec, $browser"
         "SUPER, T, exec, $terminal -e btop"
-        "SUPER, space, exec, flock --nonblock /tmp/.wofi.lock -c \"wofi -- show drun --sort-order=alphabetical\""
+        "SUPER, space, exec, flock --nonblock /tmp/.wofi.lock -c \"wofi -- show drun --sort-order=alphabetical --style='$HOME/.local/wofi/search.css'\""
         "SUPER_CTRL, space, execr, fcitx5-remote -t"
         "SUPER, O, exec, obsidian --no-sandbox %U --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
         "SUPER, W, killactive"
