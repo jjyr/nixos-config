@@ -139,10 +139,16 @@ rec {
     # services
     ../../services/hypridle.nix
     ../../services/hyprpaper.nix
+    ../../services/mako.nix
+
+    # config hyprland
     ../../../modules/config-hyprland.nix
   ];
 
   services.ssh-agent.enable = true;
+
+  # battery notify
+  services.poweralertd.enable = true;
 
   # Cursor theme
   home.pointerCursor = {

@@ -73,6 +73,8 @@
     greetd.enableGnomeKeyring = true;
   };
 
+  services.upower.enable = true;
+
   # env
   environment.sessionVariables = {
     # These are the defaults, and xdg.enable does set them, but due to load
@@ -93,6 +95,10 @@
     gcc
     killall
     libsecret
+    upower
+    libnotify
+    neofetch
+    inetutils
   ];
 
   virtualisation = {
