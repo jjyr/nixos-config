@@ -145,7 +145,7 @@
         };
         "power-profiles-daemon" = {
           "format" = "{icon}";
-          "tooltip-format" = "Power profile= {profile}";
+          "tooltip-format" = "Power profile: {profile}";
           "tooltip" = true;
           "format-icons" = {
             "power-saver" = "󰡳";

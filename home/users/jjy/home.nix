@@ -167,8 +167,8 @@ rec {
 
     # Default wallpaper
     "./.config/wallpaper/default.jpg".source = pkgs.fetchurl {
-      url = "https://images.unsplash.com/photo-1651870364199-fc5f9f46ac85";
-      sha256 = "sha256-mjb4rifSKu34xisxSn9LY5JwhW0Ktf8BIM0aV08QYFg=";
+      url = "https://unsplash.com/photos/kk3W5-0b6e0/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzUyMzMzNTU0fA";
+      sha256 = "sha256-Y4uZavbwhsqfQxIxsy7CbFQTqxDfNVxTqpzrBH6EGl8=";
       name = "default.jpg";
     };
 
