@@ -2,7 +2,9 @@
 
 Hyprland + NixOS
 
-Inspired by DHH's [Omarchy][omarchy] setup, follow Omarchy's shortcuts.
+Inspired by DHH's [Omarchy][omarchy] setup.
+
+[Shortcuts](./modules/config-hyprland.nix)
 
 [omarchy]: https://github.com/basecamp/omarchy
 
