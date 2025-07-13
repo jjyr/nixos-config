@@ -101,6 +101,18 @@
     cliPackage = pkgs.xray;
   };
 
+  # blue tooth
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+      };
+    };
+  };
+
   # env
   environment.sessionVariables = {
     # These are the defaults, and xdg.enable does set them, but due to load

@@ -26,17 +26,5 @@
     extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
   };
 
-  # blue tooth
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-
-    settings = {
-      General = {
-        Enable = "Source,Sink,Media,Socket";
-      };
-    };
-  };
-
   system.stateVersion = "25.05"; # Did you read the comment?
 }
