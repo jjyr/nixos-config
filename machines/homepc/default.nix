@@ -6,6 +6,8 @@
     ../common.nix
   ];
 
+  _module.args.extraKernelModules = [];
+
   networking.hostName = "homepc";
 
   services.openssh = {
