@@ -36,7 +36,12 @@
     enable = true;
     useRoutingFeatures = "both";
   };
-  networking.firewall.checkReversePath = "loose";
+
+  # firewall
+  networking.firewall = {
+    enable = true;
+    checkReversePath = "loose";
+  };
 
   # keyring
   services.dbus.enable = true;
@@ -74,6 +79,9 @@
   };
 
   services.upower.enable = true;
+
+  # proxy tool
+  services.v2raya.enable = true;
 
   # env
   environment.sessionVariables = {
