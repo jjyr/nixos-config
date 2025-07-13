@@ -73,6 +73,16 @@
   services.gnome.gnome-keyring.enable = true;
   programs.seahorse.enable = true;
 
+  # Nix helper
+  programs.nh = {
+    enable = true;
+    clean = {
+      enable = true;
+      extraArgs = "--keep-since 2w --keep 3";
+    };
+    flake = "/home/jjy/nixos-config";
+  };
+
   # pam service
   security.pam.services = {
     sudo.nodelay = true;
