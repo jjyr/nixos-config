@@ -121,10 +121,6 @@
       enable = true;
     };
   };
-  programs.gamescope = {
-    enable = true;
-    capSysNice = true;
-  };
 
   # env
   environment.sessionVariables = {
