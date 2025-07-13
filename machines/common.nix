@@ -1,4 +1,8 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  extraKernelModules ? [ ],
+  ...
+}:
 {
   time.timeZone = "Asia/Shanghai";
 
@@ -42,6 +46,7 @@
     enable = true;
     checkReversePath = "loose";
   };
+  networking.nftables.enable = true;
 
   # keyring
   services.dbus.enable = true;
@@ -81,7 +86,10 @@
   services.upower.enable = true;
 
   # proxy tool
-  services.v2raya.enable = true;
+  services.v2raya = {
+    enable = true;
+    cliPackage = pkgs.xray;
+  };
 
   # env
   environment.sessionVariables = {
@@ -107,16 +115,22 @@
     libnotify
     neofetch
     inetutils
+    xray
   ];
 
   virtualisation = {
-    docker = {
+    podman = {
       enable = true;
-      storageDriver = "btrfs";
-      rootless = {
-        enable = true;
-        setSocketVariable = true;
-      };
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
     };
   };
+
+  # common boot setup
+  boot = {
+    initrd.kernelModules = [ "nft_tproxy" ] ++ extraKernelModules;
+  };
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 }

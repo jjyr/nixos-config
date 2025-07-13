@@ -7,6 +7,9 @@
     ./hardware-configuration.nix
     ../common.nix
   ];
+
+  _module.args.extraKernelModules = ["amdgpu"];
+
   services.xserver.videoDrivers = [ "amdgpu" ];
   environment.systemPackages = with pkgs; [ rocmPackages.amdsmi ];
   hardware.graphics = {
@@ -34,12 +37,6 @@
       };
     };
   };
-  # services.blueman.enable = true;
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot = {
-    initrd.kernelModules = [ "amdgpu" ];
-  };
   system.stateVersion = "25.05"; # Did you read the comment?
 }

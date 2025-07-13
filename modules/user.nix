@@ -9,7 +9,7 @@
       "video"
       "audio"
       "libvirtd"
-      "docker"
+      "podman"
     ];
   };
 }
