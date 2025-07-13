@@ -113,6 +113,19 @@
     };
   };
 
+  # Steam
+  programs.steam = {
+    enable = true;
+    localNetworkGameTransfers.openFirewall = true;
+    gamescopeSession = {
+      enable = true;
+    };
+  };
+  programs.gamescope = {
+    enable = true;
+    capSysNice = true;
+  };
+
   # env
   environment.sessionVariables = {
     # These are the defaults, and xdg.enable does set them, but due to load

@@ -300,6 +300,9 @@
         "float, class:(clipse)"
         "size 622 652, class:(clipse)"
         "stayfocused, class:(clipse)"
+
+        # Steam
+        "tile, class:^(steam)$"
       ];
 
       # Proper background blur for wofi

@@ -16,7 +16,7 @@ rec {
     EDITOR = "nvim";
     NIX_PATH = "nixpkgs=flake:nixpkgs$\{NIX_PATH:+:$NIX_PATH}";
     DISPLAY = ":0";
-    XDG_DATA_DIRS = "${home.homeDirectory}/.local/share:${home.homeDirectory}/.nix-profile/share";
+    XDG_DATA_DIRS = "${home.homeDirectory}/.local/share:${home.homeDirectory}/.nix-profile/share:/run/current-system/sw/share";
   };
 
   xdg.mimeApps = {
