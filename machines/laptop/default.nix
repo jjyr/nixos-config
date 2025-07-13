@@ -8,7 +8,7 @@
     ../common.nix
   ];
 
-  _module.args.extraKernelModules = ["amdgpu"];
+  _module.args.extraKernelModules = [ "amdgpu" ];
 
   services.xserver.videoDrivers = [ "amdgpu" ];
   environment.systemPackages = with pkgs; [ rocmPackages.amdsmi ];
@@ -25,6 +25,9 @@
     ];
     extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
   };
+
+  # allowUnfree
+  nixpkgs.config.allowUnfree = true;
 
   system.stateVersion = "25.05"; # Did you read the comment?
 }
