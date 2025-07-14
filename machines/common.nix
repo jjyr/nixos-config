@@ -146,6 +146,7 @@
     libnotify
     neofetch
     inetutils
+    dnsutils
     xray
   ];
 
