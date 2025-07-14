@@ -4,9 +4,19 @@ Hyprland + NixOS
 
 Inspired by DHH's [Omarchy][omarchy] setup, and more.
 
+## Usage
+
+``` bash
+# After initial setup
+nixos-rebuild switch --flake /nixos-config#<machine>
+
+# You can run the following command to rebuild OS
+nh os switch
+```
+
 ## Shortcuts
 
-[Shortcuts](./modules/config-hyprland.nix)
+[Shortcut keys](./modules/config-hyprland.nix)
 
 ## Develop Environment
 
