@@ -14,7 +14,7 @@
   programs.fzf.enable = true;
   programs.bash.enable = true;
   programs.bash.bashrcExtra = ''
-    export PATH=$PATH:~/go/bin:~/.cargo/bin:~/.local/bin
+    export PATH=$PATH:~/go/bin:~/.cargo/bin:~/.local/bin:~/.npm/bin
     parse_git_branch() {
       git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\[(\1)\]/'
     }
@@ -26,5 +26,6 @@
   '';
   programs.bash.shellAliases = {
     ls = "eza";
+    cat = "bat";
   };
 }
