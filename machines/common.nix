@@ -80,7 +80,7 @@
       enable = true;
       extraArgs = "--keep-since 2w --keep 3";
     };
-    flake = "/home/jjy/nixos-config";
+    flake = "/nixos-config";
   };
 
   # pam service
