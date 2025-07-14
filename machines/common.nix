@@ -122,6 +122,11 @@
     };
   };
 
+  # NPM
+  programs.npm = {
+    enable = true;
+  };
+
   # env
   environment.sessionVariables = {
     # These are the defaults, and xdg.enable does set them, but due to load
