@@ -10,10 +10,12 @@ Inspired by DHH's [Omarchy][omarchy] setup, and more.
 
 ## Develop Environment
 
-Start pre-defined develop environment
-
 ``` bash
-nix develop /nixos-config/devenvs/#rust
+# Use a pre-defined develop environment
+use_env rust
+
+# The command is equals to
+nix develop --impure /nixos-config/devenvs/#rust
 ```
 
 See [devenvs/flake.nix](./devenvs/flake.nix) to learn more.
