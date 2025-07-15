@@ -25,6 +25,7 @@
           clang
           clang-tools
           pkg-config
+          openssl
         ];
 
         # GUI development dependencies
@@ -44,6 +45,8 @@
           vulkan-loader
           vulkan-tools
           vulkan-headers
+          libGLU
+          libGL
         ];
 
         # Audio dependencies
@@ -107,6 +110,38 @@
               '';
             };
 
+            # Zig development
+            zig = pkgs.mkShell {
+              buildInputs =
+                commonDeps
+                ++ guiDeps
+                ++ audioDeps
+                ++ (with pkgs; [
+                  zig
+                  inotify-tools
+                  entr
+                ]);
+
+              nativeBuildInputs = with pkgs; [
+                pkg-config
+              ];
+
+              LD_LIBRARY_PATH = builtins.foldl' (a: b: "${a}:${b}/lib") "${pkgs.vulkan-loader}/lib" (
+                guiDeps
+                ++ audioDeps
+                ++ [
+                  pkgs.mesa
+                  pkgs.libGL
+                ]
+              );
+              PKG_CONFIG_PATH = "${builtins.concatStringsSep ":" pkgConfigPaths}";
+
+              shellHook = ''
+                echo "⚡ Zig Dev"
+                echo "Zig: $(zig version)"
+              '';
+            };
+
           };
 
         # Legacy compatibility for nix-shell
@@ -116,4 +151,3 @@
       }
     );
 }
-
