@@ -26,11 +26,13 @@
           clang-tools
           pkg-config
           openssl
+          lldb
         ];
 
         # GUI development dependencies
         guiDeps = with pkgs; [
           wayland
+          wayland-scanner
           wayland-protocols
           libxkbcommon
           xorg.libX11
@@ -118,6 +120,7 @@
                 ++ audioDeps
                 ++ (with pkgs; [
                   zig
+                  zls
                   inotify-tools
                   entr
                 ]);
