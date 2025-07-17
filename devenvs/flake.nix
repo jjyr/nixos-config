@@ -27,6 +27,8 @@
           pkg-config
           openssl
           lldb
+          gnumake
+          procps # provides pkill
         ];
 
         # GUI development dependencies
@@ -73,6 +75,13 @@
           let
             workDir = builtins.getEnv "PWD";
             rustToolchain = fenix.fromToolchainFile { dir = workDir; };
+            rustStable = fenix.complete.withComponents [
+              "cargo"
+              "clippy"
+              "rust-src"
+              "rustc"
+              "rustfmt"
+            ];
           in
           {
             # Rust development
@@ -142,6 +151,31 @@
               shellHook = ''
                 echo "⚡ Zig Dev"
                 echo "Zig: $(zig version)"
+              '';
+            };
+
+            # Python development
+            python = pkgs.mkShell {
+              buildInputs =
+                with pkgs;
+                [
+                  python3
+                  python3Packages.pip
+                  python3Packages.pytest
+                  python3Packages.black
+                  python3Packages.flake8
+                  uv
+                  rustStable
+                ]
+                ++ commonDeps;
+
+              LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
+              RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
+
+              shellHook = ''
+                echo "🐍 Python Dev Environment"
+                echo "Python: $(python3 --version)"
+                echo "Pip: $(pip3 --version)"
               '';
             };
 

@@ -153,6 +153,9 @@
     inetutils
     dnsutils
     xray
+    wl-clipboard
+    podman-compose
+    devbox
   ];
 
   virtualisation = {
