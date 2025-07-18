@@ -37,7 +37,7 @@
         "SUPER ALT, ESCAPE, exit"
 
         # end sessions
-        "SUPER, L, exec, hyprlock"
+        "SUPER, period, exec, hyprlock"
         "SUPER, ESCAPE, exec, show-power-menu"
         "SUPER SHIFT, ESCAPE, exec, systemctl suspend"
 
@@ -58,15 +58,15 @@
         "SUPER CTRL, comma, exec, makoctl mode -t do-not-disturb && makoctl mode | grep -q 'do-not-disturb' && notify-send \"Silenced notifications\" || notify-send \"Enabled notifications\""
 
         # tiling
-        "SUPER, J, togglesplit, # dwindle"
-        "SUPER, P, pseudo, # dwindle"
-        "SUPER, V, togglefloating,"
+        "SUPER, apostrophe, togglesplit, # dwindle"
+        "SUPER, semicolon, pseudo, # dwindle"
+        "SUPER, slash, togglefloating,"
 
         # move focus
-        "SUPER, left, movefocus, l"
-        "SUPER, right, movefocus, r"
-        "SUPER, up, movefocus, u"
-        "SUPER, down, movefocus, d"
+        "SUPER, H, movefocus, l"
+        "SUPER, L, movefocus, r"
+        "SUPER, K, movefocus, u"
+        "SUPER, J, movefocus, d"
 
         # switch workspaces
         "SUPER, 1, workspace, 1"
@@ -92,10 +92,10 @@
         "SUPER SHIFT, 0, movetoworkspace, 10"
 
         # Swap active window with the one next to it with mainMod + SHIFT + arrow keys
-        "SUPER SHIFT, left, swapwindow, l"
-        "SUPER SHIFT, right, swapwindow, r"
-        "SUPER SHIFT, up, swapwindow, u"
-        "SUPER SHIFT, down, swapwindow, d"
+        "SUPER SHIFT, H, swapwindow, l"
+        "SUPER SHIFT, L, swapwindow, r"
+        "SUPER SHIFT, K, swapwindow, u"
+        "SUPER SHIFT, J, swapwindow, d"
 
         # Resize active window
         "SUPER, minus, resizeactive, -100 0"
