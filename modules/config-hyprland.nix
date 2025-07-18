@@ -129,6 +129,11 @@
         ", XF86AudioPrev, exec, playerctl previous"
       ];
 
+      bindm = [
+        "SUPER, mouse:272, movewindow"
+        "SUPER, mouse:273, resizewindow"
+      ];
+
       exec-once = [
         # Enable ime
         "fcitx5-remote -r"

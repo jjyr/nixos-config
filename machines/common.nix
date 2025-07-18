@@ -155,7 +155,7 @@
     xray
     wl-clipboard
     podman-compose
-    devbox
+    nnd
   ];
 
   virtualisation = {
