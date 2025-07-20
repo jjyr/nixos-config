@@ -44,6 +44,11 @@
         inherit inputs;
         inherit nixpkgs;
       };
+
+      mkHome = import ./lib/mkhome.nix {
+        inherit inputs;
+        inherit nixpkgs;
+      };
     in
     {
 
@@ -62,6 +67,17 @@
 
         homepc = mkSystem {
           name = "homepc";
+          system = "x86_64-linux";
+          nvidia = true;
+        };
+      };
+
+      homeConfigurations = {
+        "jjy@laptop" = mkHome {
+          system = "x86_64-linux";
+        };
+
+        "jjy@homepc" = mkHome {
           system = "x86_64-linux";
           nvidia = true;
         };
