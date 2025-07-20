@@ -12,6 +12,7 @@ return {
           settings = {
             zls = {
               enable_snippets = true,
+              enable_build_on_save = true,
             },
           },
         },

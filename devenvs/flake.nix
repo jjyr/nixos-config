@@ -5,6 +5,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     fenix.url = "github:nix-community/fenix";
     flake-utils.url = "github:numtide/flake-utils";
+    zig-overlay.url = "github:mitchellh/zig-overlay";
+    zls-overlay.url = "github:zigtools/zls";
   };
 
   outputs =
@@ -13,11 +15,19 @@
       nixpkgs,
       fenix,
       flake-utils,
+      zig-overlay,
+      zls-overlay,
     }:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs {
+          inherit system;
+        };
+        zig = zig-overlay.packages.${system}.master-2025-07-19;
+        zls = zls-overlay.packages.${system}.zls.overrideAttrs (old: {
+          nativeBuildInputs = [ zig ];
+        });
         fenix = import (fetchTarball "https://github.com/nix-community/fenix/archive/main.tar.gz") { };
 
         # Common dependencies for all Rust projects
@@ -71,6 +81,7 @@
 
       in
       {
+
         devShells =
           let
             workDir = builtins.getEnv "PWD";
@@ -128,11 +139,13 @@
                 ++ guiDeps
                 ++ audioDeps
                 ++ (with pkgs; [
-                  zig
-                  zls
                   inotify-tools
                   entr
-                ]);
+                ])
+                ++ [
+                  zls
+                  zig
+                ];
 
               nativeBuildInputs = with pkgs; [
                 pkg-config
