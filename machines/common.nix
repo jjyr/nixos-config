@@ -144,7 +144,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    gcc
     killall
     libsecret
     upower

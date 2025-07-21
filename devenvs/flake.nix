@@ -157,6 +157,7 @@
                 ++ [
                   pkgs.mesa
                   pkgs.libGL
+                  pkgs.stdenv.cc.cc.lib
                 ]
               );
               PKG_CONFIG_PATH = "${builtins.concatStringsSep ":" pkgConfigPaths}";
