@@ -6,9 +6,20 @@
 }:
 
 {
-  home.packages = with pkgs; [
-    tig
-  ];
+
+  programs.lazygit = {
+    enable = true;
+  };
+
+  programs.jujutsu = {
+    enable = true;
+    settings = {
+      user = {
+        name = "jjy";
+        email = "jjyruby@gmail.com";
+      };
+    };
+  };
 
   programs.git = {
     enable = true;
