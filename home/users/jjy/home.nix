@@ -17,6 +17,8 @@ rec {
     NIX_PATH = "nixpkgs=flake:nixpkgs$\{NIX_PATH:+:$NIX_PATH}";
     DISPLAY = ":0";
     XDG_DATA_DIRS = "${home.homeDirectory}/.local/share:${home.homeDirectory}/.nix-profile/share:/run/current-system/sw/share";
+    XDG_PICTURES_DIR = "${home.homeDirectory}/Downloads";
+    HYPRSHOT_DIR = "${home.homeDirectory}/Downloads";
   };
 
   xdg.mimeApps = {
