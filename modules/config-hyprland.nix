@@ -61,6 +61,7 @@
         "SUPER, apostrophe, togglesplit, # dwindle"
         "SUPER, semicolon, pseudo, # dwindle"
         "SUPER, slash, togglefloating,"
+        "SUPER CTRL, return, fullscreen"
 
         # move focus
         "SUPER, H, movefocus, l"
@@ -282,17 +283,14 @@
 
       # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
       windowrule = [
-        "suppressevent maximize, class:.*"
+        "suppressevent maximize, class:.*,fullscreen:0"
         # Force chromium into a tile to deal with --app bug
         "tile, class:^(Chromium)$"
         # Float sound and bluetooth settings
         "float, class:^(org.pulseaudio.pavucontrol|blueberry.py)$"
-        # Float Steam, fullscreen RetroArch
-        "float, class:^(steam)$"
-        "fullscreen, class:^(com.libretro.RetroArch)$"
 
         # Just dash of opacity
-        "opacity 0.97 0.9, class:.*"
+        "opacity 0.97 0.9, class:.*,fullscreen:0"
         "opacity 1 0.97, class:^(Chromium|chromium|google-chrome|google-chrome-unstable)$"
         "opacity 1 1, initialTitle:^(youtube.com_/)$ # Youtube"
         "opacity 1 1, class:^(zoom|vlc|org.kde.kdenlive|com.obsproject.Studio|com.github.PintaProject.Pinta)$"
