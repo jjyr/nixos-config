@@ -290,11 +290,7 @@
         "float, class:^(org.pulseaudio.pavucontrol|blueberry.py)$"
 
         # Just dash of opacity
-        "opacity 0.97 0.9, class:.*,fullscreen:0"
-        "opacity 1 0.97, class:^(Chromium|chromium|google-chrome|google-chrome-unstable)$"
-        "opacity 1 1, initialTitle:^(youtube.com_/)$ # Youtube"
-        "opacity 1 1, class:^(zoom|vlc|org.kde.kdenlive|com.obsproject.Studio|com.github.PintaProject.Pinta)$"
-        "opacity 1 1, class:^(com.libretro.RetroArch|steam)$"
+        "opacity 0.97 0.9, class:Alacritty"
 
         # Fix some dragging issues with XWayland
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
