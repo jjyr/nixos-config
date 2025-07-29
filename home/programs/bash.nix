@@ -36,5 +36,6 @@
   programs.bash.shellAliases = {
     ls = "eza";
     cat = "bat";
+    lg = "lazygit";
   };
 }
