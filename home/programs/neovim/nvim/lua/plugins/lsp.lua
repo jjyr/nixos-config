@@ -6,6 +6,9 @@ return {
         lua_ls = {
           mason = false,
         },
+        clangd = {
+          mason = false,
+        },
         zls = {
           mason = false,
           filetypes = { "zig", "zon" },

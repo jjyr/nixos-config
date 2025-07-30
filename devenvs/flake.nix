@@ -193,6 +193,36 @@
               '';
             };
 
+            # C development
+            c = pkgs.mkShell {
+              buildInputs =
+                commonDeps
+                ++ guiDeps
+                ++ audioDeps
+                ++ [
+                  pkgs.llvmPackages.libllvm
+                ];
+
+              nativeBuildInputs = with pkgs; [
+                pkg-config
+              ];
+
+              LD_LIBRARY_PATH = builtins.foldl' (a: b: "${a}:${b}/lib") "${pkgs.vulkan-loader}/lib" (
+                guiDeps
+                ++ audioDeps
+                ++ [
+                  pkgs.mesa
+                  pkgs.libGL
+                ]
+              );
+              PKG_CONFIG_PATH = "${builtins.concatStringsSep ":" pkgConfigPaths}";
+
+              shellHook = ''
+                echo "C c Dev"
+                echo "C: $(clang  --version)"
+              '';
+            };
+
           };
 
         # Legacy compatibility for nix-shell
