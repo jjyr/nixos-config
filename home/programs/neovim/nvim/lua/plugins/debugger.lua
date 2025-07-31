@@ -28,6 +28,13 @@ return {
           cwd = "${workspaceFolder}",
           stopOnEntry = false,
         },
+        {
+          name = "Attach",
+          type = "codelldb",
+          request = "attach",
+          pid = require('dap.utils').pick_process,
+          sourceLanguages = { "rust", "cpp", "c" },
+        },
       }
       -- Reuse the same configuration for C and Rust
       dap.configurations.c = dap.configurations.cpp

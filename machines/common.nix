@@ -168,6 +168,10 @@
   # common boot setup
   boot = {
     initrd.kernelModules = [ "nft_tproxy" ] ++ extraKernelModules;
+
+    kernel.sysctl = {
+      "kernel.yama.ptrace_scope" = 1;
+    };
   };
 
   boot.loader.systemd-boot.enable = true;
