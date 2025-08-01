@@ -170,7 +170,7 @@
     initrd.kernelModules = [ "nft_tproxy" ] ++ extraKernelModules;
 
     kernel.sysctl = {
-      "kernel.yama.ptrace_scope" = 1;
+      "kernel.yama.ptrace_scope" = 0;
     };
   };
 
