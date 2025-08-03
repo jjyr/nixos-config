@@ -49,7 +49,7 @@
       config.ssh_domains = {
         {
           name = 'homepc',
-          remote_address = 'homepc',
+          remote_address = '100.88.102.13',
           username = 'jjy',
         }
       }
