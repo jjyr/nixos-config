@@ -27,7 +27,7 @@
         no_update_news = true;
       };
       # Default apps
-      "$terminal" = "alacritty";
+      "$terminal" = "wezterm";
       "$fileManager" = "nautilus --new-window";
       "$browser" = "chromium --new-window --ozone-platform=wayland";
       "$webapp" = "$browser --app";
@@ -290,7 +290,7 @@
         "float, class:^(org.pulseaudio.pavucontrol|blueberry.py)$"
 
         # Just dash of opacity
-        "opacity 0.97 0.9, class:Alacritty"
+        "opacity 0.97 0.9, class:org.wezfurlong.wezterm"
 
         # Fix some dragging issues with XWayland
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"

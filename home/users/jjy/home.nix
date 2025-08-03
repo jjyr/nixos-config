@@ -126,7 +126,7 @@ rec {
     # ime
     ../../i18n.nix
     # programs
-    ../../programs/alacritty.nix
+    ../../programs/wezterm.nix
     ../../programs/bash.nix
     ../../programs/direnv.nix
     ../../programs/chromium.nix

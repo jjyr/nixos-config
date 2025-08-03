@@ -61,7 +61,7 @@
         "cpu" = {
           "interval" = 5;
           "format" = "󰍛";
-          "on-click" = "alacritty -e btop";
+          "on-click" = "wezterm -e btop";
         };
         "clock" = {
           "format" = "{:%b %d %a %H:%M}";
@@ -85,7 +85,7 @@
           "tooltip-format-disconnected" = "Disconnected";
           "interval" = 3;
           "nospacing" = 1;
-          "on-click" = "alacritty -e iwctl";
+          "on-click" = "wezterm -e iwctl";
         };
         "battery" = {
           "format" = "{capacity}% {icon}";
