@@ -6,7 +6,7 @@
     ../common.nix
   ];
 
-  _module.args.extraKernelModules = [];
+  _module.args.extraKernelModules = [ ];
 
   networking.hostName = "homepc";
 
@@ -25,6 +25,8 @@
   environment.systemPackages = with pkgs; [
     egl-wayland
   ];
+  environment.sessionVariables.__NV_DISABLE_EXPLICIT_SYNC = 1;
+
   nixpkgs.config.allowUnfree = true;
 
   services.xserver.videoDrivers = [ "nvidia" ];

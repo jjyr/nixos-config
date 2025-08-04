@@ -68,8 +68,7 @@
     enableAskPassword = true;
     askPassword = "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
   };
-  environment.variables.SSH_ASKPASS_REQUIRE = "prefer";
-  environment.localBinInPath = true;
+
   services.gnome.gnome-keyring.enable = true;
   programs.seahorse.enable = true;
 
@@ -127,7 +126,12 @@
     enable = true;
   };
 
+  environment.localBinInPath = true;
+
   # env
+  environment.variables = {
+    SSH_ASKPASS_REQUIRE = "prefer";
+  };
   environment.sessionVariables = {
     # These are the defaults, and xdg.enable does set them, but due to load
     # order, they're not set before environment.variables are set, which could
