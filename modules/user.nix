@@ -12,4 +12,6 @@
       "podman"
     ];
   };
+
+  home.homeDirectory = "/home/jjy";
 }

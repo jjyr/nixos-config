@@ -30,12 +30,18 @@
       url = "github:nix-community/nixpkgs-wayland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     {
       self,
       nixpkgs,
+      nix-darwin,
       ...
     }@inputs:
 
@@ -69,6 +75,14 @@
           name = "homepc";
           system = "x86_64-linux";
           nvidia = true;
+        };
+      };
+
+      darwinConfigurations = {
+        devmac = mkSystem {
+          name = "devmac";
+          system = "aarch64-darwin";
+          darwin = true;
         };
       };
 

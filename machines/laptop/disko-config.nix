@@ -1,5 +1,5 @@
 let
-  device="/dev/nvme0n1";
+  device = "/dev/nvme0n1";
 in
 {
   disko.devices = {
