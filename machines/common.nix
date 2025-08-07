@@ -159,6 +159,7 @@
     wl-clipboard
     podman-compose
     nnd
+    zellij
   ];
 
   virtualisation = {

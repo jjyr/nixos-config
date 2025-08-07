@@ -32,6 +32,9 @@
     # ime
     GTK_IM_MODULE=fcitx
     QT_IM_MODULE=fcitx
+
+    # zellij
+    eval "$(zellij setup --generate-auto-start bash)"
   '';
   programs.bash.shellAliases = {
     ls = "eza";
