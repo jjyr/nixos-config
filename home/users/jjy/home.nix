@@ -14,6 +14,7 @@ rec {
 
   home.stateVersion = "25.05";
   home.username = "jjy";
+  home.homeDirectory = (if isLinux then "/home/jjy" else "/Users/jjy");
 
   home.sessionVariables =
     {
