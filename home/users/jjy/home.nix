@@ -157,7 +157,7 @@ rec {
       # ime
       ../../i18n.nix
       # programs
-      ../../programs/wezterm.nix
+      ../../programs/alacritty.nix
       ../../programs/chromium.nix
       ../../programs/vscode.nix
       ../../programs/hyprlock.nix

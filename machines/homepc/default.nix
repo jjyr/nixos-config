@@ -25,7 +25,6 @@
   environment.systemPackages = with pkgs; [
     egl-wayland
   ];
-  environment.sessionVariables.__NV_DISABLE_EXPLICIT_SYNC = 1;
 
   nixpkgs.config.allowUnfree = true;
 
