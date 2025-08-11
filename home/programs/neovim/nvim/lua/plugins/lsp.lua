@@ -19,6 +19,36 @@ return {
             },
           },
         },
+        gopls = {
+          mason = false,
+        },
+        pyright = {
+          mason = false,
+        },
+        tsserver = {
+          mason = false,
+        },
+        nil_ls = {
+          mason = false,
+        },
+        yamlls = {
+          mason = false,
+        },
+        bashls = {
+          mason = false,
+        },
+        html = {
+          mason = false,
+        },
+        cssls = {
+          mason = false,
+        },
+        jsonls = {
+          mason = false,
+        },
+        taplo = {
+          mason = false,
+        },
       },
     },
   },

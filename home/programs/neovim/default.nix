@@ -13,7 +13,7 @@ let
       p.go
       p.gomod
       p.gowork
-      p.hcl
+      p.html
       p.javascript
       p.jq
       p.json5
@@ -45,6 +45,12 @@ in
     black
     nodejs_22
     gh
+    gopls
+    pyright
+    typescript-language-server
+    nil
+    yaml-language-server
+    bash-language-server
   ];
 
   programs.neovim = {
