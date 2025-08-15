@@ -60,7 +60,9 @@ systemFunc {
       waylandCache
       inputs.disko.nixosModules.disko
       ../modules/network.nix
-      ../modules/hyprland.nix
+      #../modules/hyprland.nix
+      ../modules/niri.nix
+      ../modules/xwayland-satellite.nix
       ../modules/user.nix
     ])
     ++ (nixpkgs.lib.optionals darwin [

@@ -6,7 +6,10 @@
     ../common.nix
   ];
 
-  _module.args.extraKernelModules = [ ];
+  _module.args = {
+    extraKernelModules = [ ];
+    nvidia = true;
+  };
 
   networking.hostName = "homepc";
 
@@ -61,6 +64,33 @@
       via = "192.168.50.1";
     }
   ];
+
+  # niri https://github.com/YaLTeR/niri/wiki/Nvidia
+  environment.etc."nvidia/nvidia-application-profiles-rc.d/50-limit-free-buffer-pool-in-wayland-compositors.json".text =
+    ''
+      {
+          "rules": [
+              {
+                  "pattern": {
+                      "feature": "procname",
+                      "matches": "niri"
+                  },
+                  "profile": "Limit Free Buffer Pool On Wayland Compositors"
+              }
+          ],
+          "profiles": [
+              {
+                  "name": "Limit Free Buffer Pool On Wayland Compositors",
+                  "settings": [
+                      {
+                          "key": "GLVidHeapReuseRatio",
+                          "value": 0
+                      }
+                  ]
+              }
+          ]
+      }
+    '';
 
   system.stateVersion = "25.05"; # Did you read the comment?
 }

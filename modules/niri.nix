@@ -1,21 +1,18 @@
 {
   pkgs,
   lib,
-  inputs,
   ...
 }:
 
 {
   environment.systemPackages = with pkgs; [
+    niri
     brightnessctl
     wireplumber
     playerctl
     blueberry
     pavucontrol
     pamixer
-    hyprcursor
-    hyprpolkitagent
-    hyprshot
     #notification
     mako
     # clipboard
@@ -23,44 +20,53 @@
     clipse
     # to fix some features such as open link or folder
     xdg-utils
+    fuzzel
+    swayidle
+    swaylock
+
+    xwayland-satellite
   ];
 
-  xdg.portal = {
-    enable = true;
-    xdgOpenUsePortal = true;
+  programs = {
+    xwayland.enable = true;
+    niri = {
+      enable = true;
+      # package = pkgs.niri-unstable;
+    };
+    gtklock.enable = true;
+  };
 
-    config = {
-      common = {
-        default = "gtk";
+  security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
+
+  services = {
+    xserver.desktopManager.runXdgAutostartIfNone = true;
+    # gvfs.enable = true;
+    # seatd.enable = true;
+  };
+
+  xdg = {
+    portal = {
+      enable = true;
+      config = {
+        niri = {
+          default = [ "gnome" ];
+          "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+        };
       };
-      hyprland.default = [
-        "gtk"
-        "hyprland"
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gnome
+        pkgs.xdg-desktop-portal-gtk
       ];
     };
-
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-hyprland
-    ];
-
-  };
-
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
-    xwayland.enable = true;
-    # package = pkgs.hyprland;
-    # portalPackage =
-    #  inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-  };
-
-  # avoid mesa version mismatch
-  hardware.graphics = {
-    package = pkgs.mesa;
-    # if you also want 32-bit support (e.g for Steam)
-    # enable32Bit = true;
-    # package32 = pkgs.pkgsi686Linux.mesa;
+    terminal-exec = {
+      enable = true;
+      settings = {
+        default = [
+          "Alacritty.desktop"
+        ];
+      };
+    };
+    autostart.enable = true;
   };
 
   # Enable greetd
@@ -73,7 +79,7 @@
       };
       tuigreet_session =
         let
-          session = "${pkgs.hyprland}/bin/Hyprland";
+          session = "${pkgs.niri}/bin/niri-session";
           tuigreet = "${lib.getExe pkgs.greetd.tuigreet}";
         in
         {

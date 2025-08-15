@@ -160,15 +160,11 @@ rec {
       ../../programs/alacritty.nix
       ../../programs/chromium.nix
       ../../programs/vscode.nix
-      ../../programs/hyprlock.nix
       ../../programs/waybar.nix
-      ../../programs/wofi.nix
       # services
-      ../../services/hypridle.nix
+      ../../services/swayidle.nix
       ../../services/hyprpaper.nix
       ../../services/mako.nix
-      # config hyprland
-      ../../../modules/config-hyprland.nix
 
     ]);
 
@@ -206,16 +202,15 @@ rec {
       if isLinux then
         {
 
+          # Niri
+          "./.config/niri/config.kdl".source = ./config/niri.kdl;
+
           # Default wallpaper
           "./.config/wallpaper/default.jpg".source = pkgs.fetchurl {
             url = "https://unsplash.com/photos/kk3W5-0b6e0/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzUyMzMzNTU0fA";
             sha256 = "sha256-Y4uZavbwhsqfQxIxsy7CbFQTqxDfNVxTqpzrBH6EGl8=";
             name = "default.jpg";
           };
-
-          # scripts
-          "./.local/bin/show-power-menu".source = ./scripts/show-power-menu;
-
         }
       else
         { }

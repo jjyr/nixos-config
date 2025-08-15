@@ -5,14 +5,8 @@
   ...
 }:
 {
-  home.packages = with pkgs; [
-    waybar
-  ];
-
   programs.waybar = {
     enable = true;
-
-    systemd.enable = true;
 
     settings = [
       {
@@ -21,7 +15,7 @@
         spacing = 0;
         height = 26;
         modules-left = [
-          "hyprland/workspaces"
+          "custom/workspaces"
         ];
         modules-center = [
           "clock"
@@ -34,7 +28,7 @@
           "power-profiles-daemon"
           "battery"
         ];
-        "hyprland/workspaces" = {
+        "custom/workspaces" = {
           "on-click" = "activate";
           "format" = "{icon}";
           "format-icons" = {

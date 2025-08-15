@@ -28,13 +28,17 @@
       fi
       nix develop --impure /nixos-config/devenvs#"$1"
     }
+  '';
 
+  programs.bash.profileExtra = ''
     # ime
-    GTK_IM_MODULE=fcitx
-    QT_IM_MODULE=fcitx
+    export GTK_IM_MODULE=fcitx
+    export QT_IM_MODULE=fcitx
 
     # zellij
-    eval "$(zellij setup --generate-auto-start bash)"
+    if [ -n "''${XDG_CURRENT_DESKTOP+x}" ]; then
+      eval "$(zellij setup --generate-auto-start bash)"
+    fi
   '';
   programs.bash.shellAliases = {
     ls = "eza";

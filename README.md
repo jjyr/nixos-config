@@ -1,8 +1,6 @@
 # NixOS config
 
-Hyprland + NixOS
-
-Inspired by DHH's [Omarchy][omarchy] setup, and more.
+NixOS + Niri
 
 ## Usage
 

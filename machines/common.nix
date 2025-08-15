@@ -1,5 +1,6 @@
 {
   pkgs,
+  nvidia ? false,
   extraKernelModules ? [ ],
   ...
 }:
@@ -85,7 +86,7 @@
   # pam service
   security.pam.services = {
     sudo.nodelay = true;
-    hyprlock = {
+    swaylock = {
       nodelay = true;
       enableGnomeKeyring = true;
     };
@@ -132,20 +133,39 @@
   environment.variables = {
     SSH_ASKPASS_REQUIRE = "prefer";
   };
-  environment.sessionVariables = {
-    # These are the defaults, and xdg.enable does set them, but due to load
-    # order, they're not set before environment.variables are set, which could
-    # cause race conditions.
-    NIXOS_OZONE_WL = 1;
-    MOA_ENABLE_WAYLAND = 1;
-    XDG_CURRENT_DESKTOP = "Hyprland";
-    XDG_SESSION_DESKTOP = "Hyprland";
-    XDG_SESSION_TYPE = "wayland";
-    GDK_BACKEND = "wayland,x11";
-    QT_QPA_PLATFORM = "wayland;xcb";
+  environment.sessionVariables =
+    {
+      # These are the defaults, and xdg.enable does set them, but due to load
+      # order, they're not set before environment.variables are set, which could
+      # cause race conditions.
+      NIXOS_OZONE_WL = 1;
+      MOA_ENABLE_WAYLAND = 1;
+      XDG_SESSION_TYPE = "wayland";
+      GDK_BACKEND = "wayland,x11";
+      QT_QPA_PLATFORM = "wayland;xcb";
+      QT_STYLE_OVERRIDE = "kvantum";
+      MOZ_ENABLE_WAYLAND = "1";
+      ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+      OZONE_PLATFORM = "wayland";
+      CHROMIUM_FLAGS = "--enable-features=UseOzonePlatform --ozone-platform=wayland --gtk-version=4";
+      XCOMPOSEFILE = "~/.XCompose";
+      GDK_SCALE = "2";
+      SSH_AUTH_SOCK = "\${XDG_RUNTIME_DIR}/gcr/ssh";
+      GNOME_KEYRING_CONTROL = "\${XDG_RUNTIME_DIR}/keyring";
 
-    # templates = "${self}/dev-shells";
-  };
+      # templates = "${self}/dev-shells";
+    }
+    // (
+      if nvidia then
+        {
+          NVD_BACKEND = "direct";
+          LIBVA_DRIVER_NAME = "nvidia";
+          __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+
+        }
+      else
+        { }
+    );
 
   environment.systemPackages = with pkgs; [
     killall

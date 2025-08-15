@@ -16,11 +16,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     waybar = {
       url = "github:Alexays/waybar";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -57,14 +52,6 @@
       };
     in
     {
-
-      # Enable Cachix for hyprland
-      nix.settings = {
-        substituters = [ "https://hyprland.cachix.org" ];
-        trusted-substituters = [ "https://hyprland.cachix.org" ];
-        trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
-      };
-
       nixosConfigurations = {
         laptop = mkSystem {
           name = "laptop";
