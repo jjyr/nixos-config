@@ -8,7 +8,10 @@
     ../common.nix
   ];
 
-  _module.args.extraKernelModules = [ "amdgpu" ];
+  _module.args = {
+    extraKernelModules = [ "amdgpu" ];
+    nvidia = false;
+  };
 
   services.xserver.videoDrivers = [ "amdgpu" ];
   environment.systemPackages = with pkgs; [ rocmPackages.amdsmi ];

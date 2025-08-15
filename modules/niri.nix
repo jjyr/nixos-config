@@ -22,7 +22,6 @@
     xdg-utils
     fuzzel
     swayidle
-    swaylock
 
     xwayland-satellite
   ];
@@ -31,7 +30,6 @@
     xwayland.enable = true;
     niri = {
       enable = true;
-      # package = pkgs.niri-unstable;
     };
     gtklock.enable = true;
   };

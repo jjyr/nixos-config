@@ -86,7 +86,7 @@
   # pam service
   security.pam.services = {
     sudo.nodelay = true;
-    swaylock = {
+    gtklock = {
       nodelay = true;
       enableGnomeKeyring = true;
     };
