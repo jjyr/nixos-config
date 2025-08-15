@@ -97,6 +97,7 @@
         "SUPER SHIFT, L, swapwindow, r"
         "SUPER SHIFT, K, swapwindow, u"
         "SUPER SHIFT, J, swapwindow, d"
+        "SUPER, Tab, swapnext"
 
         # Resize active window
         "SUPER, minus, resizeactive, -100 0"
