@@ -22,15 +22,14 @@
     xdg-utils
     fuzzel
     swayidle
+    gtklock
 
     xwayland-satellite
   ];
 
   programs = {
     xwayland.enable = true;
-    niri = {
-      enable = true;
-    };
+    niri.enable = true;
     gtklock.enable = true;
   };
 
