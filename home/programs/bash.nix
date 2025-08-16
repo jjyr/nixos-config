@@ -31,10 +31,6 @@
   '';
 
   programs.bash.profileExtra = ''
-    # ime
-    export GTK_IM_MODULE=fcitx
-    export QT_IM_MODULE=fcitx
-
     # zellij
     if [ -n "''${XDG_CURRENT_DESKTOP+x}" ]; then
       eval "$(zellij setup --generate-auto-start bash)"
