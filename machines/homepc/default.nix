@@ -56,6 +56,17 @@
     "net.ipv6.conf.all.forwarding" = 1;
   };
 
+  # sunshine
+  services.sunshine = {
+    enable = true;
+    autoStart = true;
+    capSysAdmin = true;
+    openFirewall = true;
+    package = pkgs.sunshine.override {
+      cudaSupport = true;
+    };
+  };
+
   # networking
   networking.interfaces.enp42s0.ipv4.routes = [
     {

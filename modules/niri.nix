@@ -23,8 +23,8 @@
     fuzzel
     swayidle
     gtklock
-
     xwayland-satellite
+    moonlight-qt
   ];
 
   programs = {
