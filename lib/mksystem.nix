@@ -21,7 +21,13 @@ let
 
   isLinux = !darwin;
 
-  waylandCache = (
+  niri_overlay = _: _: {
+    niri = inputs.niri.packages.${system}.default.overrideAttrs (_: {
+      doCheck = false;
+    });
+  };
+
+  overlays = (
     { pkgs, config, ... }:
     {
       config = {
@@ -38,7 +44,10 @@ let
         };
 
         # use it as an overlay
-        nixpkgs.overlays = [ inputs.nixpkgs-wayland.overlay ];
+        nixpkgs.overlays = [
+          inputs.nixpkgs-wayland.overlay
+          niri_overlay
+        ];
       };
     }
   );
@@ -57,7 +66,7 @@ systemFunc {
 
   modules =
     (nixpkgs.lib.optionals isLinux [
-      waylandCache
+      overlays
       inputs.disko.nixosModules.disko
       ../modules/network.nix
       #../modules/hyprland.nix

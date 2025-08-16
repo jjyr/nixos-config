@@ -7,17 +7,14 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     disko = {
       url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    waybar = {
-      url = "github:Alexays/waybar";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -28,6 +25,12 @@
 
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # niri
+    niri = {
+      url = "github:YaLTeR/niri";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
