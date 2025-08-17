@@ -8,6 +8,19 @@
 let
   isDarwin = pkgs.stdenv.isDarwin;
   isLinux = pkgs.stdenv.isLinux;
+
+  obsidian = (
+    pkgs.obsidian.overrideAttrs (e: rec {
+      # Add arguments to the .desktop entry
+      desktopItem = e.desktopItem.override (d: {
+        exec = "${d.exec} --no-sandbox --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3";
+      });
+
+      # Update the install script to use the new .desktop entry
+      installPhase = builtins.replaceStrings [ "${e.desktopItem}" ] [ "${desktopItem}" ] e.installPhase;
+    })
+  );
+
 in
 rec {
   programs.home-manager.enable = true;
