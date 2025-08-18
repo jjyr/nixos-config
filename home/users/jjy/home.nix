@@ -176,7 +176,6 @@ rec {
       ../../programs/waybar.nix
       # services
       ../../services/swayidle.nix
-      ../../services/hyprpaper.nix
       ../../services/mako.nix
 
     ]);

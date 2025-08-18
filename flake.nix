@@ -8,29 +8,24 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixpkgs-wayland = {
-      url = "github:nix-community/nixpkgs-wayland";
+      url = "github:nix-community/nixpkgs-wayland/72464fa91bc05397dae6b24d7c027bc3f342c20f";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-darwin = {
-      url = "github:nix-darwin/nix-darwin/master";
+      url = "github:nix-darwin/nix-darwin/e04a388232d9a6ba56967ce5b53a8a6f713cdfcf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # niri
     niri = {
-      url = "github:YaLTeR/niri";
+      url = "github:YaLTeR/niri/6d0505e684c9b93e03a8b4cc5a313c4dea365e54";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

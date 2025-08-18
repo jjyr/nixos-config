@@ -78,7 +78,6 @@ systemFunc {
       ../modules/darwin-user.nix
     ])
     ++ [
-      # inputs.agenix.nixosModules.default
       # Home manager
       home-manager.home-manager
       {

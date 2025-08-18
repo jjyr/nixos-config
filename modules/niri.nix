@@ -25,6 +25,7 @@
     gtklock
     xwayland-satellite
     moonlight-qt
+    swaybg
   ];
 
   programs = {
@@ -71,13 +72,13 @@
     enable = true;
     settings = rec {
       regreet_session = {
-        command = "${lib.getExe pkgs.cage} -s -- ${lib.getExe pkgs.greetd.regreet}";
+        command = "${lib.getExe pkgs.cage} -s -- ${lib.getExe pkgs.regreet}";
         user = "greeter";
       };
       tuigreet_session =
         let
           session = "${pkgs.niri}/bin/niri-session";
-          tuigreet = "${lib.getExe pkgs.greetd.tuigreet}";
+          tuigreet = "${lib.getExe pkgs.tuigreet}";
         in
         {
           command = "${tuigreet} --time --remember --cmd ${session}";

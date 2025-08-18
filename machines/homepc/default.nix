@@ -27,6 +27,9 @@
   # nvidia
   environment.systemPackages = with pkgs; [
     egl-wayland
+    (pkgs.ollama.override {
+      acceleration = "cuda";
+    })
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -102,6 +105,12 @@
           ]
       }
     '';
+
+  # Ollama
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+  };
 
   system.stateVersion = "25.05"; # Did you read the comment?
 }
