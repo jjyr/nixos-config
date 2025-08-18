@@ -2,7 +2,7 @@
   description = "Personal development environments";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/32f313e49e42f715491e1ea7b306a87c16fe0388";
     fenix.url = "github:nix-community/fenix";
     flake-utils.url = "github:numtide/flake-utils";
     zig-overlay.url = "github:mitchellh/zig-overlay";
@@ -124,6 +124,7 @@
                 guiDeps ++ audioDeps
               );
               PKG_CONFIG_PATH = "${builtins.concatStringsSep ":" pkgConfigPaths}";
+              VK_LAYER_PATH = "${pkgs.vulkan-validation-layers}/share/vulkan/explicit_layer.d";
 
               shellHook = ''
                 echo "🎮 Rust Game Dev"

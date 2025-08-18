@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ./disko-config.nix
@@ -7,7 +7,11 @@
   ];
 
   _module.args = {
-    extraKernelModules = [ ];
+    extraKernelModules = [
+      "nvidia"
+      "nvidia_modeset"
+      "nvidia_drm"
+    ];
     nvidia = true;
   };
 
@@ -25,13 +29,6 @@
   ];
 
   # nvidia
-  environment.systemPackages = with pkgs; [
-    egl-wayland
-    (pkgs.ollama.override {
-      acceleration = "cuda";
-    })
-  ];
-
   nixpkgs.config.allowUnfree = true;
 
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -40,6 +37,7 @@
     enable32Bit = true;
   };
   hardware.nvidia = {
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
     modesetting.enable = true;
     powerManagement = {
       enable = true;
