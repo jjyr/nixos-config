@@ -29,28 +29,8 @@
           "battery"
         ];
         "custom/workspaces" = {
-          "on-click" = "activate";
-          "format" = "{icon}";
-          "format-icons" = {
-            "default" = "";
-            "1" = "1";
-            "2" = "2";
-            "3" = "3";
-            "4" = "4";
-            "5" = "5";
-            "6" = "6";
-            "7" = "7";
-            "8" = "8";
-            "9" = "9";
-            "active" = "󱓻";
-          };
-          "persistent-workspaces" = {
-            "1" = [ ];
-            "2" = [ ];
-            "3" = [ ];
-            "4" = [ ];
-            "5" = [ ];
-          };
+          "exec" = "sh $HOME/.config/waybar/modules/niri-workspaces.sh \"$WAYBAR_OUTPUT_NAME\"";
+          "signal" = 8;
         };
         "cpu" = {
           "interval" = 5;
@@ -159,23 +139,10 @@
       }
 
       #waybar {
-        background: transparent;
+        background-color: #1a1b26;
         color: #c6d0f5;
         margin: 0px;
         font-weight: 500;
-      }
-
-      #workspaces,
-      #cpu {
-        background-color: #1a1b26;
-        padding: 0.3rem 0.7rem;
-        margin: 5px 0px; /* 5px top/bottom margin, 0px left/right (base for individual control) */
-        border-radius: 6px; /* These modules are always rounded */
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        min-width: 0;
-        border: none;
-        /* Transition for background-color and color only */
-        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
       }
 
       #workspaces {
@@ -209,18 +176,6 @@
         color: #c6d0f5;
       }
 
-      /* --- Center Module (Individual, Fully Rounded Block - With Simple Hover) --- */
-      #clock {
-        background-color: #1a1b26;
-        padding: 0.3rem 0.7rem;
-        margin: 5px 0px;
-        border-radius: 6px; /* This module is always rounded */
-        box-shadow: 0 1px 3px rgba(153, 209, 219, 0.2);
-        min-width: 0;
-        border: none;
-        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-      }
-
       /* Simple Hover effect for clock module - BRIGHTER COLOR */
       #clock:hover {
         background-color: rgba(153, 209, 219, 0.1); /* Brighter highlight */
@@ -228,6 +183,7 @@
 
 
       #power-profiles-daemon,
+      #cpu,
       #battery,
       #network,
       #bluetooth,
@@ -242,6 +198,9 @@
         transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
       }
 
+      #clock:hover,
+      #power-profiles-daemon:hover,
+      #cpu:hover,
       #bluetooth:hover,
       #pulseaudio:hover,
       #backlight:hover,
@@ -266,12 +225,13 @@
       #custom-uptime {
         color: #babbf1;
       }
+
       #cpu {
         color: #c6d0f5;
       }
 
       #clock {
-        color: #99d1db;
+        color: #c6d0f5;
         font-weight: 500;
       }
 
