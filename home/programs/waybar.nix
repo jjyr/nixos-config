@@ -132,7 +132,7 @@
           "format" = "";
           "format-muted" = "󰝟";
           "scroll-step" = 5;
-          "on-click" = "GTK_THEME=Adwaita-dark pavucontrol";
+          "on-click" = "alacritty -e pulsemixer";
           "tooltip-format" = "Playing at {volume}%";
           "on-click-right" = "pamixer -t";
           "ignored-sinks" = [ "Easy Effects Sink" ];
