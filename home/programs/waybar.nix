@@ -139,7 +139,7 @@
       }
 
       #waybar {
-        background-color: #1a1b26;
+        background-color: rgba(26, 27, 38, 0.8);
         color: #c6d0f5;
         margin: 0px;
         font-weight: 500;
@@ -176,11 +176,14 @@
         color: #c6d0f5;
       }
 
-      /* Simple Hover effect for clock module - BRIGHTER COLOR */
-      #clock:hover {
-        background-color: rgba(153, 209, 219, 0.1); /* Brighter highlight */
+      #clock {
+        background-color: #1a1b26;
+        border-radius: 0;
+        box-shadow: none;
+        min-width: 0;
+        border: none;
+        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
       }
-
 
       #power-profiles-daemon,
       #cpu,
