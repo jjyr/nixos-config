@@ -11,8 +11,8 @@
     wireplumber
     playerctl
     blueberry
+    pavucontrol
     pamixer
-    pulsemixer
     #notification
     mako
     # clipboard
