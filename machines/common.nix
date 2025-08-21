@@ -162,6 +162,8 @@
         LIBVA_DRIVER_NAME = "nvidia";
         __GLX_VENDOR_LIBRARY_NAME = "nvidia";
 
+        # fix vulkan on nvidia
+        GSK_RENDERER = "ngl";
       }
     else
       { }
