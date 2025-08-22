@@ -101,6 +101,9 @@
     cliPackage = pkgs.xray;
   };
 
+  # Early OOM to prevent hang
+  services.earlyoom.enable = true;
+
   # blue tooth
   hardware.bluetooth = {
     enable = true;
@@ -126,6 +129,12 @@
   # NPM
   programs.npm = {
     enable = true;
+  };
+
+  # Localsend
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
   };
 
   environment.localBinInPath = true;
