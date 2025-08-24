@@ -192,7 +192,6 @@
       wl-clipboard
       podman-compose
       nnd
-      zellij
       vulkan-tools # For vkcube, vulkaninfo
       vulkan-loader
       vulkan-validation-layers
