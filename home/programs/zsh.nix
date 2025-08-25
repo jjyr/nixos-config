@@ -14,7 +14,7 @@
   programs.fzf.enable = true;
   programs.zsh.enable = true;
   programs.zsh.envExtra = ''
-    export PATH=$PATH:~/go/bin:~/.cargo/bin:~/.local/bin:~/.npm/bin
+    export PATH=$PATH:/usr/local/sbin:~/go/bin:~/.cargo/bin:~/.local/bin:~/.npm/bin
     parse_git_branch() {
       git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\[(\1)\]/'
     }

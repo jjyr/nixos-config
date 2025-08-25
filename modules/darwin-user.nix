@@ -14,8 +14,16 @@
 
   homebrew = {
     enable = true;
+
+    brews = [
+      "docker"
+    ];
     casks = [
+      "kitty"
       "tailscale"
+      "orbstack"
+      "localsend"
+      "obsidian"
     ];
   };
 

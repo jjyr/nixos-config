@@ -29,23 +29,22 @@ rec {
   home.username = "jjy";
   home.homeDirectory = (if isLinux then "/home/jjy" else "/Users/jjy");
 
-  home.sessionVariables =
-    {
-      EDITOR = "nvim";
-      NIX_PATH = "nixpkgs=flake:nixpkgs$\{NIX_PATH:+:$NIX_PATH}";
-    }
-    // (
-      if isLinux then
-        {
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    NIX_PATH = "nixpkgs=flake:nixpkgs$\{NIX_PATH:+:$NIX_PATH}";
+  }
+  // (
+    if isLinux then
+      {
 
-          DISPLAY = ":0";
-          XDG_DATA_DIRS = "${home.homeDirectory}/.local/share:${home.homeDirectory}/.nix-profile/share:/run/current-system/sw/share";
-          XDG_PICTURES_DIR = "${home.homeDirectory}/Downloads";
-          HYPRSHOT_DIR = "${home.homeDirectory}/Downloads";
-        }
-      else
-        { }
-    );
+        DISPLAY = ":0";
+        XDG_DATA_DIRS = "${home.homeDirectory}/.local/share:${home.homeDirectory}/.nix-profile/share:/run/current-system/sw/share";
+        XDG_PICTURES_DIR = "${home.homeDirectory}/Downloads";
+        HYPRSHOT_DIR = "${home.homeDirectory}/Downloads";
+      }
+    else
+      { }
+  );
 
   xdg.mimeApps = (
     if isLinux then
@@ -158,32 +157,31 @@ rec {
     ]);
 
   # Programs
-  imports =
-    [
-      # programs
-      ../../programs/direnv.nix
-      ../../programs/git.nix
-      ../../programs/neovim
+  imports = [
+    # programs
+    ../../programs/direnv.nix
+    ../../programs/git.nix
+    ../../programs/neovim
 
-    ]
-    ++ (pkgs.lib.optionals isLinux [
-      ../../programs/bash.nix
-      ../../programs/fonts.nix
-      # ime
-      ../../i18n.nix
-      # programs
-      ../../programs/alacritty.nix
-      ../../programs/chromium.nix
-      ../../programs/vscode.nix
-      ../../programs/waybar.nix
-      # services
-      ../../services/swayidle.nix
-      ../../services/mako.nix
+  ]
+  ++ (pkgs.lib.optionals isLinux [
+    ../../programs/bash.nix
+    ../../programs/fonts.nix
+    # ime
+    ../../i18n.nix
+    # programs
+    ../../programs/alacritty.nix
+    ../../programs/chromium.nix
+    ../../programs/vscode.nix
+    ../../programs/waybar.nix
+    # services
+    ../../services/swayidle.nix
+    ../../services/mako.nix
 
-    ])
-    ++ (pkgs.lib.optionals isDarwin [
-      ../../programs/zsh.nix
-    ]);
+  ])
+  ++ (pkgs.lib.optionals isDarwin [
+    ../../programs/zsh.nix
+  ]);
 
   services.ssh-agent.enable = isLinux;
 
@@ -203,36 +201,38 @@ rec {
     forwardAgent = true;
   };
 
-  home.file =
-    {
+  home.file = {
 
-      # ssh
-      "./.ssh/config".text = ''
-        Host homepc
-        HostName homepc
-        User jjy
-        ForwardAgent yes
-      '';
+    # ssh
+    "./.ssh/config".text = ''
+      Host homepc
+      HostName homepc
+      User jjy
+      ForwardAgent yes
+    '';
 
-    }
-    // (
-      if isLinux then
-        {
+  }
+  // (
+    if isLinux then
+      {
 
-          # Niri
-          "./.config/niri/config.kdl".source = ./config/niri.kdl;
+        # Niri
+        "./.config/niri/config.kdl".source = ./config/niri.kdl;
 
-          # Waybar
-          "./.config/waybar/modules/niri-workspaces.sh".source = ./config/niri-workspaces.sh;
+        # Waybar
+        "./.config/waybar/modules/niri-workspaces.sh".source = ./config/niri-workspaces.sh;
 
-          # Default wallpaper
-          "./.config/wallpaper/default.jpg".source = pkgs.fetchurl {
-            url = "https://unsplash.com/photos/kk3W5-0b6e0/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzUyMzMzNTU0fA";
-            sha256 = "sha256-Y4uZavbwhsqfQxIxsy7CbFQTqxDfNVxTqpzrBH6EGl8=";
-            name = "default.jpg";
-          };
-        }
-      else
-        { }
-    );
+        # Default wallpaper
+        "./.config/wallpaper/default.jpg".source = pkgs.fetchurl {
+          url = "https://unsplash.com/photos/kk3W5-0b6e0/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzUyMzMzNTU0fA";
+          sha256 = "sha256-Y4uZavbwhsqfQxIxsy7CbFQTqxDfNVxTqpzrBH6EGl8=";
+          name = "default.jpg";
+        };
+      }
+    else
+      {
+        # Kitty
+        "./.config/kitty/kitty.conf".source = ./config/kitty.conf;
+      }
+  );
 }
