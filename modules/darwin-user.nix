@@ -6,9 +6,14 @@
   system = {
     primaryUser = "jjy";
     defaults = {
-      trackpad.TrackpadThreeFingerDrag = true;
+      trackpad = {
+        TrackpadThreeFingerDrag = true;
+        Clicking = true;
+      };
     };
   };
+
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   time.timeZone = "Asia/Shanghai";
 
