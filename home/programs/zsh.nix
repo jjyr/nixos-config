@@ -13,22 +13,36 @@
 
   programs.fzf.enable = true;
   programs.zsh.enable = true;
-  programs.zsh.envExtra = ''
-    export PATH=$PATH:/usr/local/sbin:~/go/bin:~/.cargo/bin:~/.local/bin:~/.npm/bin
-    parse_git_branch() {
-      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\[(\1)\]/'
-    }
-    export PS1="\n\[\033[1;32m\][\[\e]0;\u@\h: \w\a\]\u@\h:\w]\[\033[33m\]\$(parse_git_branch)\[\033[1;32m\]\$\[\033[0m\] "
+  programs.zsh.initContent =
+    let
+      zshConfig = lib.mkOrder 1500 ''
+        export PATH=$PATH:/usr/local/sbin:~/go/bin:~/.cargo/bin:~/.local/bin:~/.npm/bin
 
-    use_dev() {
-      if [[ -z "$1" ]]; then
-        echo "❌ Please pass dev env arg, for example: use_dev rust"
-        echo "Usage: use_dev <name>"
-        return 1
-      fi
-      nix develop --impure /nixos-config/devenvs#"$1"
-    }
-  '';
+        # PROMPT
+        autoload -Uz vcs_info
+        precmd() { vcs_info }
+        zstyle ':vcs_info:git:*' formats '(%b)'
+        setopt PROMPT_SUBST
+        PROMPT='%B%F{green}%n@%m:%B%F{cray}%~%f%F{yellow}''${vcs_info_msg_0_}%f%B%F{cray}$ %f%b'
+
+        use_dev() {
+          if [[ -z "$1" ]]; then
+            echo "❌ Please pass dev env arg, for example: use_dev rust"
+            echo "Usage: use_dev <name>"
+            return 1
+          fi
+          nix develop --impure /nixos-config/devenvs#"$1"
+        }
+
+        # edit-command-line
+        autoload -z edit-command-line
+        zle -N edit-command-line
+        bindkey "^x^E" edit-command-line
+      '';
+    in
+    lib.mkMerge [
+      zshConfig
+    ];
 
   programs.zsh.profileExtra = ''
     # zellij
