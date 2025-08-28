@@ -4,16 +4,27 @@
   pkgs,
   ...
 }:
+let
 
+  isDarwin = pkgs.stdenv.isDarwin;
+  isLinux = pkgs.stdenv.isLinux;
+in
 {
   programs.alacritty = {
     enable = true;
     settings = {
       terminal = {
-        shell = {
-          program = "${pkgs.bash}/bin/bash";
-          args = [ "-l" ];
-        };
+        shell =
+          if isLinux then
+            {
+              program = "${pkgs.bash}/bin/bash";
+              args = [ "-l" ];
+            }
+          else
+            {
+              program = "${pkgs.zsh}/bin/zsh";
+              args = [ "-l" ];
+            };
       };
 
       env = {
@@ -26,21 +37,39 @@
         ];
       };
 
-      font = {
-        size = 9;
-        normal = {
-          family = "CaskaydiaMono Nerd Font";
-          style = "Regular";
-        };
-        bold = {
-          family = "CaskaydiaMono Nerd Font";
-          style = "Bold";
-        };
-        italic = {
-          family = "CaskaydiaMono Nerd Font";
-          style = "Italic";
-        };
-      };
+      font =
+        if isLinux then
+          {
+            size = 9;
+            normal = {
+              family = "CaskaydiaMono Nerd Font";
+              style = "Regular";
+            };
+            bold = {
+              family = "CaskaydiaMono Nerd Font";
+              style = "Bold";
+            };
+            italic = {
+              family = "CaskaydiaMono Nerd Font";
+              style = "Italic";
+            };
+          }
+        else
+          {
+            size = 12;
+            normal = {
+              family = "CaskaydiaMono Nerd Font";
+              style = "Regular";
+            };
+            bold = {
+              family = "CaskaydiaMono Nerd Font";
+              style = "Bold";
+            };
+            italic = {
+              family = "CaskaydiaMono Nerd Font";
+              style = "Italic";
+            };
+          };
 
       window = {
         opacity = 0.98;

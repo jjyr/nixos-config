@@ -24,7 +24,6 @@
       "docker"
     ];
     casks = [
-      "kitty"
       "tailscale"
       "orbstack"
       "localsend"

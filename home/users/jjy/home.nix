@@ -162,15 +162,14 @@ rec {
     ../../programs/direnv.nix
     ../../programs/git.nix
     ../../programs/neovim
-
+    ../../programs/alacritty.nix
+    ../../programs/fonts.nix
   ]
   ++ (pkgs.lib.optionals isLinux [
     ../../programs/bash.nix
-    ../../programs/fonts.nix
     # ime
     ../../i18n.nix
     # programs
-    ../../programs/alacritty.nix
     ../../programs/chromium.nix
     ../../programs/vscode.nix
     ../../programs/waybar.nix
@@ -231,8 +230,6 @@ rec {
       }
     else
       {
-        # Kitty
-        "./.config/kitty/kitty.conf".source = ./config/kitty.conf;
       }
   );
 }
