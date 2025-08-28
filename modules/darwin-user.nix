@@ -22,6 +22,7 @@
 
     brews = [
       "docker"
+      "rust-analyzer"
     ];
     casks = [
       "kitty"
