@@ -26,6 +26,7 @@
 
   users.users.jjy.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINzqqIUmjCCZSh6+5xYBtTMQpK1FSA36IHTaWC6qt+jG"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMZjVzHrolOLYkmwg7vEA5/0HplKX4UNZ2yDfkilmh/q"
   ];
 
   # nvidia
