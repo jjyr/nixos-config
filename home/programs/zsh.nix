@@ -16,7 +16,7 @@
   programs.zsh.initContent =
     let
       zshConfig = lib.mkOrder 1500 ''
-        export PATH=$PATH:/usr/local/sbin:~/go/bin:~/.cargo/bin:~/.local/bin:~/.npm/bin
+        export PATH=$PATH:/usr/local/sbin:/opt/homebrew/bin:~/go/bin:~/.cargo/bin:~/.local/bin:~/.npm/bin
 
         # PROMPT
         autoload -Uz vcs_info
