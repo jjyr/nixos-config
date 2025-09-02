@@ -31,7 +31,7 @@
             echo "Usage: use_dev <name>"
             return 1
           fi
-          nix develop --impure /nixos-config/devenvs#"$1"
+          nix develop --impure ~/Workspace/nixos-config/devenvs#"$1"
         }
 
         # edit-command-line

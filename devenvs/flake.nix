@@ -224,6 +224,21 @@
               '';
             };
 
+            # Go development
+            go = pkgs.mkShell {
+              buildInputs = commonDeps ++ [
+                pkgs.go
+                pkgs.gopls
+                pkgs.go-tools
+              ];
+
+              shellHook = ''
+                echo "🐹 Go Dev Environment"
+                echo "Go: $(go version)"
+                echo "GOPATH: $GOPATH"
+              '';
+            };
+
           };
 
         # Legacy compatibility for nix-shell
