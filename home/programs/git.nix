@@ -18,6 +18,7 @@
     ignores = [
       ".direnv/"
       ".go/"
+      ".DS_Store"
     ];
     extraConfig = {
       init = {
