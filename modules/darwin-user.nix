@@ -22,8 +22,10 @@
 
     brews = [
       "docker"
+      "wget"
     ];
     casks = [
+      "hammerspoon"
       "kitty"
       "tailscale"
       "orbstack"
