@@ -196,7 +196,7 @@ rec {
   };
 
   programs.ssh = {
-    enable = true;
+    enable = isLinux;
     forwardAgent = true;
   };
 
@@ -206,8 +206,14 @@ rec {
     "./.ssh/config".text = ''
       Host homepc
       HostName homepc
-      User jjy
-      ForwardAgent yes
+        User jjy
+        ForwardAgent yes
+
+      Host *
+        UseKeychain yes
+        AddKeysToAgent yes
+        IdentityFile ~/.ssh/id_ed25519
+        ServerAliveInterval 120
     '';
 
   }
