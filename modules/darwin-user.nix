@@ -23,11 +23,12 @@
     brews = [
       "docker"
       "wget"
+      "mise"
     ];
     casks = [
       "hammerspoon"
       "kitty"
-      "tailscale"
+      "tailscale-app"
       "orbstack"
       "localsend"
       "obsidian"

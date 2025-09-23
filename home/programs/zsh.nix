@@ -38,6 +38,9 @@
         autoload -z edit-command-line
         zle -N edit-command-line
         bindkey "^x^E" edit-command-line
+
+        # mise
+        eval "$(/opt/homebrew/bin/mise activate zsh)"
       '';
     in
     lib.mkMerge [
