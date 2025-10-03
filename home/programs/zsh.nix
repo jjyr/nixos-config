@@ -41,6 +41,9 @@
 
         # mise
         eval "$(/opt/homebrew/bin/mise activate zsh)"
+
+        # rustup
+        export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
       '';
     in
     lib.mkMerge [
